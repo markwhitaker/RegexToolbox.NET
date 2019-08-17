@@ -1,9 +1,13 @@
+aliases:
+  - &setup-environment
+    docker:
+      - image: mcr.microsoft.com/dotnet/core/sdk:2.2
+
 version: 2
 
 jobs:
   build:
-    docker:
-      - image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    <<: *setup-environment
     steps:
       - checkout
       - run:
@@ -18,3 +22,35 @@ jobs:
           name: Run tests
           command:
             dotnet test
+
+  deploy-nuget-package:
+    <<: *setup-environment
+    steps:
+      - checkout
+      - run:
+          name: Build NuGet package
+          command:
+            dotnet pack -c Release -o nugetPackage
+      - deploy:
+          name: Publish NuGet package
+          command:
+            dotnet nuget push nugetPackage/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - deploy-nuget-package:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              # Only tags beginning x.y.z
+              only: /^\d+\.\d+\.\d+.*$/

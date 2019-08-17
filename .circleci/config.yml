@@ -34,7 +34,7 @@ jobs:
       - deploy:
           name: Publish NuGet package
           command:
-            dotnet nuget push $CIRCLE_WORKING_DIRECTORY/RegexToolbox/nugetPackage/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+            dotnet nuget push RegexToolbox/nugetPackage/*.nupkg -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
 
 
 workflows:

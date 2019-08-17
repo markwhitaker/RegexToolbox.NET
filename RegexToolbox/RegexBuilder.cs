@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -50,7 +51,7 @@ namespace RegexToolbox
                 throw new RegexBuilderException(_openGroupCount + " groups have been started but not ended", _stringBuilder);
             }
 
-            System.Text.RegularExpressions.RegexOptions combinedOptions = System.Text.RegularExpressions.RegexOptions.None;
+            var combinedOptions = System.Text.RegularExpressions.RegexOptions.None;
             foreach (var option in options)
             {
                 switch (option)

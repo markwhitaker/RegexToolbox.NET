@@ -21,35 +21,17 @@
         /// <summary>
         /// Quantifier to match the preceding element zero or more times
         /// </summary>
-        public static RegexGreedyQuantifier ZeroOrMore
-        {
-            get
-            {
-                return new RegexGreedyQuantifier("*");
-            }
-        }
+        public static RegexGreedyQuantifier ZeroOrMore => new RegexGreedyQuantifier("*");
 
         /// <summary>
         /// Quantifier to match the preceding element one or more times
         /// </summary>
-        public static RegexGreedyQuantifier OneOrMore
-        {
-            get
-            {
-                return new RegexGreedyQuantifier("+");
-            }
-        }
+        public static RegexGreedyQuantifier OneOrMore => new RegexGreedyQuantifier("+");
 
         /// <summary>
         /// Quantifier to match the preceding element once or not at all
         /// </summary>
-        public static RegexGreedyQuantifier NoneOrOne
-        {
-            get
-            {
-                return new RegexGreedyQuantifier("?");
-            }
-        }
+        public static RegexGreedyQuantifier NoneOrOne => new RegexGreedyQuantifier("?");
 
         #endregion
 

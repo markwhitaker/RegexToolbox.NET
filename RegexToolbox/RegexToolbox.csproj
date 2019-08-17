@@ -3,7 +3,6 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <PackageId>RegexToolbox</PackageId>
-        <PackageVersion>1.0.3</PackageVersion>
         <Title>RegexToolbox</Title>
         <Authors>Mark Whitaker</Authors>
         <Description>Regular expression tools for .NET developers</Description>
@@ -15,5 +14,9 @@
         <RepositoryType>Git</RepositoryType>
         <Company>Mainwave</Company>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="GitVersionTask" Version="5.0.1" />
+    </ItemGroup>
 
 </Project>

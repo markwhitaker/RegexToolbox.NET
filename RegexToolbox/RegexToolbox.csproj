@@ -2,6 +2,18 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
+        <PackageId>RegexToolbox</PackageId>
+        <PackageVersion>1.0.3</PackageVersion>
+        <Title>RegexToolbox</Title>
+        <Authors>Mark Whitaker</Authors>
+        <Description>Regular expression tools for .NET developers</Description>
+        <Copyright>Mark Whitaker</Copyright>
+        <PackageProjectUrl>https://github.com/markwhitaker/RegexToolbox.NET</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/markwhitaker/RegexToolbox.NET/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageIconUrl>https://raw.githubusercontent.com/markwhitaker/RegexToolbox.NET/master/Artwork/RegexToolbox-icon-100.png</PackageIconUrl>
+        <Repository>https://github.com/markwhitaker/RegexToolbox.NET</Repository>
+        <RepositoryType>Git</RepositoryType>
+        <Company>Mainwave</Company>
     </PropertyGroup>
 
 </Project>

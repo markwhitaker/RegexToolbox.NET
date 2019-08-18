@@ -434,6 +434,44 @@ namespace RegexToolbox.Tests
         }
 
         [Test]
+        public void TestPossibleWhitespace()
+        {
+            var regex = new RegexBuilder()
+                .NonWhitespace()
+                .PossibleWhitespace()
+                .NonWhitespace()
+                .BuildRegex();
+
+            Assert.AreEqual(@"\S\s*\S", regex.ToString());
+            Assert.IsFalse(regex.IsMatch("1"));
+            Assert.IsFalse(regex.IsMatch("0"));
+            Assert.IsTrue(regex.IsMatch("999"));
+            Assert.IsTrue(regex.IsMatch("there's a digit in here s0mewhere"));
+            Assert.IsFalse(regex.IsMatch(" "));
+            Assert.IsTrue(regex.IsMatch("abc"));
+            Assert.IsTrue(regex.IsMatch("xFFF"));
+
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseHexDigits));
+            Assert.IsTrue(regex.IsMatch(Strings.Symbols));
+            Assert.IsFalse(regex.IsMatch(Strings.WhiteSpace));
+            Assert.IsTrue(regex.IsMatch(Strings.ControlCharacters));
+            Assert.IsFalse(regex.IsMatch(Strings.Empty));
+            Assert.IsTrue(regex.IsMatch(Strings.SimpleName));
+            Assert.IsTrue(regex.IsMatch(Strings.SimpleEmailAddress));
+            Assert.IsTrue(regex.IsMatch(Strings.SimpleHttpUrl));
+            Assert.IsTrue(regex.IsMatch(Strings.SimpleHttpsUrl));
+            Assert.IsTrue(regex.IsMatch(Strings.Ipv4Address));
+            Assert.IsTrue(regex.IsMatch(Strings.Ipv6Address));
+            Assert.IsTrue(regex.IsMatch(Strings.MacAddress));
+        }
+        
+        [Test]
         public void TestDigit()
         {
             var regex = new RegexBuilder()

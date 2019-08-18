@@ -152,6 +152,16 @@ namespace RegexToolbox
         }
 
         /// <summary>
+        /// Add an element to represent any amount of white space, including none. This is just a convenient alias for
+        /// <code>Whitespace(RegexQuantifier.ZeroOrMore)</code>.
+        /// </summary>
+        /// <returns></returns>
+        public RegexBuilder PossibleWhitespace()
+        {
+            return Whitespace(RegexQuantifier.ZeroOrMore);
+        }
+
+        /// <summary>
         /// Add an element to match a single space character. If you want to match any kind of white space, use
         /// <see cref="Whitespace"/>.
         /// </summary>

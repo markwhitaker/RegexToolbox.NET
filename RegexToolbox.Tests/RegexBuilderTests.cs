@@ -1149,7 +1149,7 @@ namespace RegexToolbox.Tests
         public void TestAnyOf()
         {
             var regex = new RegexBuilder()
-                .AnyOf(new[] { "cat", "dog", "|" })
+                .AnyOf("cat", "dog", "|")
                 .BuildRegex();
 
             Assert.AreEqual(@"(?:cat|dog|\|)", regex.ToString());
@@ -1166,6 +1166,82 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.Symbols));
+            Assert.IsFalse(regex.IsMatch(Strings.WhiteSpace));
+            Assert.IsFalse(regex.IsMatch(Strings.ControlCharacters));
+            Assert.IsFalse(regex.IsMatch(Strings.Empty));
+            Assert.IsFalse(regex.IsMatch(Strings.SimpleName));
+            Assert.IsFalse(regex.IsMatch(Strings.SimpleEmailAddress));
+            Assert.IsFalse(regex.IsMatch(Strings.SimpleHttpUrl));
+            Assert.IsFalse(regex.IsMatch(Strings.SimpleHttpsUrl));
+            Assert.IsFalse(regex.IsMatch(Strings.Ipv4Address));
+            Assert.IsFalse(regex.IsMatch(Strings.Ipv6Address));
+            Assert.IsFalse(regex.IsMatch(Strings.MacAddress));
+        }
+
+        [Test]
+        public void TestAnyOfWithArray()
+        {
+            var strings = new[] {"cat", "dog", "|"};
+            var regex = new RegexBuilder()
+                .AnyOf(strings)
+                .BuildRegex();
+
+            Assert.AreEqual(@"(?:cat|dog|\|)", regex.ToString());
+            Assert.IsFalse(regex.IsMatch("ca do"));
+            Assert.IsTrue(regex.IsMatch("cat"));
+            Assert.IsTrue(regex.IsMatch("dog"));
+            Assert.IsTrue(regex.IsMatch("|"));
+
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseHexDigits));
+            Assert.IsTrue(regex.IsMatch(Strings.Symbols));
+            Assert.IsFalse(regex.IsMatch(Strings.WhiteSpace));
+            Assert.IsFalse(regex.IsMatch(Strings.ControlCharacters));
+            Assert.IsFalse(regex.IsMatch(Strings.Empty));
+            Assert.IsFalse(regex.IsMatch(Strings.SimpleName));
+            Assert.IsFalse(regex.IsMatch(Strings.SimpleEmailAddress));
+            Assert.IsFalse(regex.IsMatch(Strings.SimpleHttpUrl));
+            Assert.IsFalse(regex.IsMatch(Strings.SimpleHttpsUrl));
+            Assert.IsFalse(regex.IsMatch(Strings.Ipv4Address));
+            Assert.IsFalse(regex.IsMatch(Strings.Ipv6Address));
+            Assert.IsFalse(regex.IsMatch(Strings.MacAddress));
+        }
+
+        [Test]
+        public void TestAnyOfWithQuantifier()
+        {
+            var strings = new[] {"cat", "dog", "|"};
+            var regex = new RegexBuilder()
+                .AnyOf(strings, RegexQuantifier.Exactly(2))
+                .BuildRegex();
+
+            Assert.AreEqual(@"(?:cat|dog|\|){2}", regex.ToString());
+            Assert.IsFalse(regex.IsMatch("cat dog"));
+            Assert.IsTrue(regex.IsMatch("catdog"));
+            Assert.IsTrue(regex.IsMatch("cat|dog"));
+            Assert.IsFalse(regex.IsMatch("cat"));
+            Assert.IsTrue(regex.IsMatch("catcat"));
+            Assert.IsTrue(regex.IsMatch("catcatcat"));
+            Assert.IsFalse(regex.IsMatch("dog"));
+            Assert.IsTrue(regex.IsMatch("dogdog"));
+            Assert.IsTrue(regex.IsMatch("dogdogdog"));
+            Assert.IsFalse(regex.IsMatch("|"));
+            Assert.IsTrue(regex.IsMatch("||"));
+            Assert.IsTrue(regex.IsMatch("|||"));
+
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseHexDigits));
+            Assert.IsFalse(regex.IsMatch(Strings.Symbols));
             Assert.IsFalse(regex.IsMatch(Strings.WhiteSpace));
             Assert.IsFalse(regex.IsMatch(Strings.ControlCharacters));
             Assert.IsFalse(regex.IsMatch(Strings.Empty));

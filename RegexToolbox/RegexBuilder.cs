@@ -416,6 +416,16 @@ namespace RegexToolbox
                 .EndGroup(quantifier);
         }
 
+        /// <summary>
+        /// Add a group of alternatives, to match any of the strings provided. If you need to add a quantifier,
+        /// use the overloaded method.
+        /// </summary>
+        /// <param name="strings">A number of strings, any one of which will be matched</param>
+        public RegexBuilder AnyOf(params string[] strings)
+        {
+            return AnyOf(strings, null);
+        }
+
         #endregion
 
         #region Anchors (zero-width assertions)

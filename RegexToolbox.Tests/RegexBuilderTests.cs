@@ -1680,7 +1680,7 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .Letter()
-                .Digit(RegexQuantifier.NoneOrOne)
+                .Digit(RegexQuantifier.ZeroOrOne)
                 .Letter()
                 .BuildRegex();
 
@@ -2006,7 +2006,7 @@ namespace RegexToolbox.Tests
             // Very basic URL checker!
             var regex = new RegexBuilder()
                 .Text("http")
-                .Text("s", RegexQuantifier.NoneOrOne)
+                .Text("s", RegexQuantifier.ZeroOrOne)
                 .Text("://")
                 .NonWhitespace(RegexQuantifier.OneOrMore)
                 .AnyCharacterFrom("a-zA-Z0-9_/") // Valid last characters
@@ -2324,7 +2324,7 @@ namespace RegexToolbox.Tests
         public void TestNoneOrOneButAsFewAsPossible()
         {
             var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.NoneOrOne.ButAsFewAsPossible)
+                .Digit(RegexQuantifier.ZeroOrOne.ButAsFewAsPossible)
                 .BuildRegex();
 
             Assert.AreEqual(@"\d??", regex.ToString());

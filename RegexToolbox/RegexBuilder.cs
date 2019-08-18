@@ -152,6 +152,51 @@ namespace RegexToolbox
         }
 
         /// <summary>
+        /// Add an element to match a single space character. If you want to match any kind of white space, use
+        /// <see cref="Whitespace"/>.
+        /// </summary>
+        /// <param name="quantifier">Quantifier to apply to this element</param>
+        public RegexBuilder Space(RegexQuantifier quantifier = null)
+        {
+            _stringBuilder.Append(" ");
+            AddQuantifier(quantifier);
+            return this;
+        }
+
+        /// <summary>
+        /// Add an element to match a single tab character.
+        /// </summary>
+        /// <param name="quantifier">Quantifier to apply to this element</param>
+        public RegexBuilder Tab(RegexQuantifier quantifier = null)
+        {
+            _stringBuilder.Append(@"\t");
+            AddQuantifier(quantifier);
+            return this;
+        }
+
+        /// <summary>
+        /// Add an element to match a single line feed character.
+        /// </summary>
+        /// <param name="quantifier">Quantifier to apply to this element</param>
+        public RegexBuilder LineFeed(RegexQuantifier quantifier = null)
+        {
+            _stringBuilder.Append(@"\n");
+            AddQuantifier(quantifier);
+            return this;
+        }
+
+        /// <summary>
+        /// Add an element to match a single carriage return character.
+        /// </summary>
+        /// <param name="quantifier">Quantifier to apply to this element</param>
+        public RegexBuilder CarriageReturn(RegexQuantifier quantifier = null)
+        {
+            _stringBuilder.Append(@"\r");
+            AddQuantifier(quantifier);
+            return this;
+        }
+
+        /// <summary>
         /// Add an element to match any single decimal digit (0-9).
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>

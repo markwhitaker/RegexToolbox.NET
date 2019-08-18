@@ -1,4 +1,6 @@
-﻿namespace RegexToolbox
+﻿using System;
+
+namespace RegexToolbox
 {
     /// <summary>
     /// Quantifiers that can be applied to regex elements or groups
@@ -31,7 +33,13 @@
         /// <summary>
         /// Quantifier to match the preceding element once or not at all
         /// </summary>
+        [Obsolete("use ZeroOrOne instead")]
         public static RegexGreedyQuantifier NoneOrOne => new RegexGreedyQuantifier("?");
+
+        /// <summary>
+        /// Quantifier to match the preceding element once or not at all
+        /// </summary>
+        public static RegexGreedyQuantifier ZeroOrOne => new RegexGreedyQuantifier("?");
 
         #endregion
 

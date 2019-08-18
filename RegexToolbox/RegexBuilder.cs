@@ -152,6 +152,61 @@ namespace RegexToolbox
         }
 
         /// <summary>
+        /// Add an element to represent any amount of white space, including none. This is just a convenient alias for
+        /// <code>Whitespace(RegexQuantifier.ZeroOrMore)</code>.
+        /// </summary>
+        /// <returns></returns>
+        public RegexBuilder PossibleWhitespace()
+        {
+            return Whitespace(RegexQuantifier.ZeroOrMore);
+        }
+
+        /// <summary>
+        /// Add an element to match a single space character. If you want to match any kind of white space, use
+        /// <see cref="Whitespace"/>.
+        /// </summary>
+        /// <param name="quantifier">Quantifier to apply to this element</param>
+        public RegexBuilder Space(RegexQuantifier quantifier = null)
+        {
+            _stringBuilder.Append(" ");
+            AddQuantifier(quantifier);
+            return this;
+        }
+
+        /// <summary>
+        /// Add an element to match a single tab character.
+        /// </summary>
+        /// <param name="quantifier">Quantifier to apply to this element</param>
+        public RegexBuilder Tab(RegexQuantifier quantifier = null)
+        {
+            _stringBuilder.Append(@"\t");
+            AddQuantifier(quantifier);
+            return this;
+        }
+
+        /// <summary>
+        /// Add an element to match a single line feed character.
+        /// </summary>
+        /// <param name="quantifier">Quantifier to apply to this element</param>
+        public RegexBuilder LineFeed(RegexQuantifier quantifier = null)
+        {
+            _stringBuilder.Append(@"\n");
+            AddQuantifier(quantifier);
+            return this;
+        }
+
+        /// <summary>
+        /// Add an element to match a single carriage return character.
+        /// </summary>
+        /// <param name="quantifier">Quantifier to apply to this element</param>
+        public RegexBuilder CarriageReturn(RegexQuantifier quantifier = null)
+        {
+            _stringBuilder.Append(@"\r");
+            AddQuantifier(quantifier);
+            return this;
+        }
+
+        /// <summary>
         /// Add an element to match any single decimal digit (0-9).
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
@@ -359,6 +414,16 @@ namespace RegexToolbox
             return StartNonCapturingGroup()
                 .RegexText(string.Join("|", stringsList.Select(MakeSafeForRegex)))
                 .EndGroup(quantifier);
+        }
+
+        /// <summary>
+        /// Add a group of alternatives, to match any of the strings provided. If you need to add a quantifier,
+        /// use the overloaded method.
+        /// </summary>
+        /// <param name="strings">A number of strings, any one of which will be matched</param>
+        public RegexBuilder AnyOf(params string[] strings)
+        {
+            return AnyOf(strings, null);
         }
 
         #endregion

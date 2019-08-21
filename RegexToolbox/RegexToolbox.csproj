@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netstandard1.0</TargetFramework>
         <PackageId>RegexToolbox</PackageId>
         <Title>RegexToolbox</Title>
         <Authors>Mark Whitaker</Authors>

@@ -234,7 +234,7 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder Letter(RegexQuantifier quantifier = null)
         {
-            _stringBuilder.Append("[a-zA-Z]");
+            _stringBuilder.Append(@"\p{L}");
             AddQuantifier(quantifier);
             return this;
         }
@@ -245,7 +245,7 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder NonLetter(RegexQuantifier quantifier = null)
         {
-            _stringBuilder.Append("[^a-zA-Z]");
+            _stringBuilder.Append(@"\P{L}");
             AddQuantifier(quantifier);
             return this;
         }
@@ -256,7 +256,7 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder UppercaseLetter(RegexQuantifier quantifier = null)
         {
-            _stringBuilder.Append("[A-Z]");
+            _stringBuilder.Append(@"\p{Lu}");
             AddQuantifier(quantifier);
             return this;
         }
@@ -267,7 +267,7 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder LowercaseLetter(RegexQuantifier quantifier = null)
         {
-            _stringBuilder.Append("[a-z]");
+            _stringBuilder.Append(@"\p{Ll}");
             AddQuantifier(quantifier);
             return this;
         }
@@ -278,7 +278,7 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder LetterOrDigit(RegexQuantifier quantifier = null)
         {
-            _stringBuilder.Append("[a-zA-Z0-9]");
+            _stringBuilder.Append(@"[\p{L}0-9]");
             AddQuantifier(quantifier);
             return this;
         }
@@ -289,7 +289,7 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder NonLetterOrDigit(RegexQuantifier quantifier = null)
         {
-            _stringBuilder.Append("[^a-zA-Z0-9]");
+            _stringBuilder.Append(@"[^\p{L}0-9]");
             AddQuantifier(quantifier);
             return this;
         }
@@ -344,7 +344,7 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder WordCharacter(RegexQuantifier quantifier = null)
         {
-            _stringBuilder.Append(@"\w");
+            _stringBuilder.Append(@"[\p{L}0-9_]");
             AddQuantifier(quantifier);
             return this;
         }
@@ -355,7 +355,7 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder NonWordCharacter(RegexQuantifier quantifier = null)
         {
-            _stringBuilder.Append(@"\W");
+            _stringBuilder.Append(@"[^\p{L}0-9_]");
             AddQuantifier(quantifier);
             return this;
         }

@@ -3,9 +3,9 @@
     public static class Strings
     {
         #region Character classes
-        public const string BothCaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        public const string UpperCaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        public const string LowerCaseAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        public const string BothCaseLatinAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        public const string UpperCaseLatinAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public const string LowerCaseLatinAlphabet = "abcdefghijklmnopqrstuvwxyz";
         public const string DecimalDigits = "0123456789";
         public const string BothCaseHexDigits = "0123456789ABCDEFabcdef";
         public const string UpperCaseHexDigits = "0123456789ABCDEF";

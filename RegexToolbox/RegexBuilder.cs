@@ -229,7 +229,7 @@ namespace RegexToolbox
         }
 
         /// <summary>
-        /// Add an element to match any letter in the Roman alphabet (a-z, A-Z)
+        /// Add an element to match any Unicode letter
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder Letter(RegexQuantifier quantifier = null)
@@ -240,7 +240,7 @@ namespace RegexToolbox
         }
 
         /// <summary>
-        /// Add an element to match any character that is not a letter in the Roman alphabet (a-z, A-Z)
+        /// Add an element to match any character that is not a Unicode letter
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder NonLetter(RegexQuantifier quantifier = null)
@@ -251,7 +251,7 @@ namespace RegexToolbox
         }
 
         /// <summary>
-        /// Add an element to match any upper-case letter in the Roman alphabet (A-Z).
+        /// Add an element to match any upper-case Unicode letter
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder UppercaseLetter(RegexQuantifier quantifier = null)
@@ -262,7 +262,7 @@ namespace RegexToolbox
         }
 
         /// <summary>
-        /// Add an element to match any lowercase letter in the Roman alphabet (a-z)
+        /// Add an element to match any lowercase Unicode letter
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder LowercaseLetter(RegexQuantifier quantifier = null)
@@ -273,7 +273,7 @@ namespace RegexToolbox
         }
 
         /// <summary>
-        /// Add an element to match any letter in the Roman alphabet or decimal digit (a-z, A-Z, 0-9)
+        /// Add an element to match any Unicode letter or decimal digit
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder LetterOrDigit(RegexQuantifier quantifier = null)
@@ -284,7 +284,7 @@ namespace RegexToolbox
         }
 
         /// <summary>
-        /// Add an element to match any character that is not letter in the Roman alphabet or a decimal digit (a-z, A-Z, 0-9)
+        /// Add an element to match any character that is not a Unicode letter or a decimal digit
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder NonLetterOrDigit(RegexQuantifier quantifier = null)
@@ -339,7 +339,7 @@ namespace RegexToolbox
         }
 
         /// <summary>
-        /// Add an element to match any Roman alphabet letter, decimal digit, or underscore (a-z, A-Z, 0-9, _)
+        /// Add an element to match any Unicode letter, decimal digit, or underscore
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder WordCharacter(RegexQuantifier quantifier = null)
@@ -350,7 +350,7 @@ namespace RegexToolbox
         }
 
         /// <summary>
-        /// Add an element to match any character that is not a Roman alphabet letter, decimal digit, or underscore (a-z, A-Z, 0-9, _)
+        /// Add an element to match any character that is not a Unicode letter, decimal digit, or underscore
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder NonWordCharacter(RegexQuantifier quantifier = null)

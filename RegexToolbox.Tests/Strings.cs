@@ -6,6 +6,9 @@
         public const string BothCaseLatinAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         public const string UpperCaseLatinAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public const string LowerCaseLatinAlphabet = "abcdefghijklmnopqrstuvwxyz";
+        public const string BothCaseExtendedAlphabet = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞẞĀĂĄĆĈĊČĎĐĒĔĖĘĚĜĞĠĢĤĦĨĪĬĮİĴĶĹĻĽĿŁŃŅŇŊŌŎŐŒŔŖŘŚŜŞŠŢŤŦŨŪŬŮŰŲŴŶŸŹŻŽàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþßāăąćĉċčďđēĕėęěĝğġģĥħĩīĭįiĵķĺļľŀłńņňŋōŏőœŕŗřśŝşšţťŧũūŭůűųŵŷÿźżž";
+        public const string UpperCaseExtendedAlphabet = "ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞẞĀĂĄĆĈĊČĎĐĒĔĖĘĚĜĞĠĢĤĦĨĪĬĮİĴĶĹĻĽĿŁŃŅŇŊŌŎŐŒŔŖŘŚŜŞŠŢŤŦŨŪŬŮŰŲŴŶŸŹŻŽ";
+        public const string LowerCaseExtendedAlphabet = "àáâãäåæçèéêëìíîïðñòóôõöøùúûüýþßāăąćĉċčďđēĕėęěĝğġģĥħĩīĭįiĵķĺļľŀłńņňŋōŏőœŕŗřśŝşšţťŧũūŭůűųŵŷÿźżž";
         public const string DecimalDigits = "0123456789";
         public const string BothCaseHexDigits = "0123456789ABCDEFabcdef";
         public const string UpperCaseHexDigits = "0123456789ABCDEF";

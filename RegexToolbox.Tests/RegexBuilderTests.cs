@@ -22,6 +22,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -57,6 +60,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -90,6 +96,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -120,6 +129,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -156,6 +168,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -191,6 +206,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -228,6 +246,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -265,6 +286,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -302,6 +326,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -339,6 +366,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -376,6 +406,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -416,6 +449,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -454,6 +490,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -490,6 +529,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -527,6 +569,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -564,6 +609,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -601,6 +649,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -638,6 +689,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -675,6 +729,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -713,6 +770,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -751,6 +811,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -789,6 +852,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -827,6 +893,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -865,6 +934,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -903,6 +975,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -941,6 +1016,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -979,6 +1057,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1016,6 +1097,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1053,6 +1137,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1090,6 +1177,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1128,6 +1218,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1161,6 +1254,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1195,6 +1291,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1237,6 +1336,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1296,6 +1398,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1335,6 +1440,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1376,6 +1484,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1427,6 +1538,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1465,6 +1579,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1504,6 +1621,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1545,6 +1665,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1601,6 +1724,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1658,6 +1784,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1696,6 +1825,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1734,6 +1866,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1752,7 +1887,7 @@ namespace RegexToolbox.Tests
         }
 
         [Test]
-        public void TestOneOrNone()
+        public void TestZeroOrOne()
         {
             var regex = new RegexBuilder()
                 .Letter()
@@ -1772,6 +1907,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1813,6 +1951,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1854,6 +1995,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1895,6 +2039,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1936,6 +2083,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -1976,6 +2126,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2014,6 +2167,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2059,6 +2215,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2113,6 +2272,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2160,6 +2322,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2251,6 +2416,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2283,6 +2451,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2315,6 +2486,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2347,6 +2521,9 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsFalse(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsFalse(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2379,6 +2556,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));
@@ -2411,6 +2591,9 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseLatinAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.LowerCaseLatinAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.BothCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.UpperCaseExtendedAlphabet));
+            Assert.IsTrue(regex.IsMatch(Strings.LowerCaseExtendedAlphabet));
             Assert.IsTrue(regex.IsMatch(Strings.DecimalDigits));
             Assert.IsTrue(regex.IsMatch(Strings.BothCaseHexDigits));
             Assert.IsTrue(regex.IsMatch(Strings.UpperCaseHexDigits));

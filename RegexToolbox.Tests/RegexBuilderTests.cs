@@ -1158,6 +1158,20 @@ namespace RegexToolbox.Tests
         }
 
         [Test]
+        public void TestAnyCharacterFromWithHyphen()
+        {
+            var regex = new RegexBuilder()
+                .AnyCharacterFrom("a-f")
+                .BuildRegex();
+
+            Assert.AreEqual(@"[a\-f]", regex.ToString());
+            Assert.IsTrue(regex.IsMatch("a"));
+            Assert.IsTrue(regex.IsMatch("-"));
+            Assert.IsTrue(regex.IsMatch("f"));
+            Assert.IsFalse(regex.IsMatch("c"));
+        }
+
+        [Test]
         public void TestAnyCharacterFromWithCaretNotAtStart()
         {
             var regex = new RegexBuilder()
@@ -2244,10 +2258,10 @@ namespace RegexToolbox.Tests
                 .Text("s", RegexQuantifier.ZeroOrOne)
                 .Text("://")
                 .NonWhitespace(RegexQuantifier.OneOrMore)
-                .AnyCharacterFrom("a-zA-Z0-9_/") // Valid last characters
+                .AnyCharacterFrom("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_/") // Valid last characters
                 .BuildRegex();
 
-            Assert.AreEqual(@"http(?:s)?://\S+[a-zA-Z0-9_/]", regex.ToString());
+            Assert.AreEqual(@"http(?:s)?://\S+[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_/]", regex.ToString());
             Assert.IsTrue(regex.IsMatch("http://www.mainwave.co.uk"));
             Assert.IsTrue(regex.IsMatch("https://www.mainwave.co.uk"));
             Assert.IsFalse(regex.IsMatch("www.mainwave.co.uk"));

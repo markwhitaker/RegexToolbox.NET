@@ -24,14 +24,14 @@ namespace RegexToolbox
         private int _openGroupCount;
 
         #region Constructors
-        
+
         public RegexBuilder()
         {
             _stringBuilder = new StringBuilder();
         }
 
         #endregion
-        
+
         #region Build method
 
         /// <summary>
@@ -46,6 +46,7 @@ namespace RegexToolbox
             {
                 throw new RegexBuilderException("A group has been started but not ended", _stringBuilder);
             }
+
             if (_openGroupCount > 1)
             {
                 throw new RegexBuilderException(_openGroupCount + " groups have been started but not ended", _stringBuilder);
@@ -543,8 +544,11 @@ namespace RegexToolbox
 
         private string MakeSafeForCharacterClass(string s)
         {
-            // Replace ] with \]
-            var result = s.Replace("]", @"\]");
+            var result = s
+                // Replace ] with \]
+                .Replace("]", @"\]")
+                // Replace - with \-
+                .Replace("-", @"\-");
 
             // replace ^ with \^ if it occurs at the start of the string
             if (result.StartsWith("^"))
@@ -576,6 +580,7 @@ namespace RegexToolbox
 
             return result;
         }
+
         #endregion
     }
 }

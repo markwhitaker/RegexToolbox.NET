@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,15 +22,22 @@ namespace RegexToolbox
     /// </summary>
     public sealed class RegexBuilder
     {
+        /// <summary>
+        /// Interface to a logger attached by the client code which will receive log messages as the regex is built.
+        /// </summary>
         public interface ILogger
         {
+            /// <summary>
+            /// Log a message to a real logger (Trace, Console, a third-party logging framework, or whatever you want).
+            /// </summary>
+            /// <param name="message">Message to log</param>
             void Log(string message);
         }
         
         private const string DefaultLogTag = "RegexBuilder";
         private readonly StringBuilder _stringBuilder = new StringBuilder();
-        private ILogger _logger;
-        private string _logTag;
+        private Action<string> _logFunction;
+        private string _prefix;
         
         private int _openGroupCount;
 
@@ -67,9 +75,8 @@ namespace RegexToolbox
                 }
             }
 
-            var regexString = _stringBuilder.ToString();
-            Log(regexString);
-            var regex = new Regex(regexString, combinedOptions);
+            Log($"Building regex: {_stringBuilder}");
+            var regex = new Regex(_stringBuilder.ToString(), combinedOptions);
             _stringBuilder.Clear();
             return regex;
         }
@@ -78,10 +85,27 @@ namespace RegexToolbox
 
         #region Logging
 
-        public RegexBuilder AddLogger(ILogger logger, string logTag = DefaultLogTag)
+        /// <summary>
+        /// Attach a logger to this builder using this <see cref="ILogger"/> interface. The builder will emit logging
+        /// messages to it as the regex is built.
+        /// </summary>
+        /// <param name="logger">Logger to receive log messages from the builder</param>
+        /// <param name="prefix">A prefix to add at the start of each log message. Defaults to "RegexBuilder".</param>
+        public RegexBuilder AddLogger(ILogger logger, string prefix = DefaultLogTag)
         {
-            _logger = logger;
-            _logTag = logTag;
+            return AddLogger(logger.Log, prefix);
+        }
+
+        /// <summary>
+        /// Attach a logger to this builder using a lambda expression. The builder will emit logging
+        /// messages to it as the regex is built.
+        /// </summary>
+        /// <param name="logFunction">Lambda to invoke with log messages from the builder</param>
+        /// <param name="prefix">A prefix to add at the start of each log message. Defaults to "RegexBuilder".</param>
+        public RegexBuilder AddLogger(Action<string> logFunction, string prefix = DefaultLogTag)
+        {
+            _logFunction = logFunction;
+            _prefix = prefix;
             return this;
         }
 
@@ -407,7 +431,7 @@ namespace RegexToolbox
 
         private RegexBuilder AddPart(string part, RegexQuantifier quantifier = null)
         {
-            Log($"{part}{quantifier}");
+            Log($"Adding part: {part}{quantifier}");
             _stringBuilder
                 .Append(part)
                 .Append(quantifier);
@@ -416,7 +440,7 @@ namespace RegexToolbox
 
         private void Log(string message)
         {
-            _logger?.Log($"{_logTag}: {message}");
+            _logFunction?.Invoke($"{_prefix}: {message}");
         }
         
         private RegexBuilder AddPartInNonCapturingGroup(string part, RegexQuantifier quantifier = null) =>

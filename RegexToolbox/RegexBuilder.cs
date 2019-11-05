@@ -10,16 +10,14 @@ namespace RegexToolbox
     /// Class to build regular expressions in a more human-readable way using a fluent API.
     /// 
     /// To use, chain method calls representing the elements you want to match, and finish with
-    /// <see cref="BuildRegex"/> to build the Regex. Example:
-    ///
-    /// <code>
+    /// <see cref="BuildRegex"/> to build the Regex.
+    /// </summary>
+    /// <example>
     /// Regex regex = new RegexBuilder()
     ///     .Text("cat")
     ///     .EndOfString()
     ///     .BuildRegex();
-    /// </code>
-    /// 
-    /// </summary>
+    /// </example>
     public sealed class RegexBuilder
     {
         /// <summary>

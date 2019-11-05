@@ -74,8 +74,7 @@ namespace RegexToolbox
             }
 
             var stringBuilt = _stringBuilder.ToString();
-            var optionsString = string.Join(", ", options.Select(o => Enum.GetName(typeof(RegexOptions), o)));
-            Log($"BuildRegex({optionsString})", stringBuilt);
+            Log("BuildRegex()", stringBuilt);
             var regex = new Regex(stringBuilt, combinedOptions);
             _stringBuilder.Clear();
             return regex;
@@ -481,7 +480,7 @@ namespace RegexToolbox
 
         private void Log(string method, string message)
         {
-            _logFunction?.Invoke($"{_prefix}: {method} => {message}");
+            _logFunction?.Invoke($"{_prefix}: {method}: {message}");
         }
         
         private RegexBuilder AddPartInNonCapturingGroup(string methodName, string part, RegexQuantifier quantifier = null) =>

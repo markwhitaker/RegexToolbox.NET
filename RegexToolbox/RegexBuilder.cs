@@ -480,7 +480,7 @@ namespace RegexToolbox
 
         private void Log(string method, string message)
         {
-            _logFunction?.Invoke($"{_prefix}: {method} => {message}");
+            _logFunction?.Invoke($"{_prefix}: {method}: {message}");
         }
         
         private RegexBuilder AddPartInNonCapturingGroup(string methodName, string part, RegexQuantifier quantifier = null) =>

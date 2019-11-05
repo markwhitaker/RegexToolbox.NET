@@ -46,7 +46,7 @@ RegexBuilder: WordBoundary(): \b
 RegexBuilder: Text("Regex"): Regex
 RegexBuilder: AnyOf("Builder", "Toolbox"): (?:Builder|Toolbox)
 RegexBuilder: WordBoundary(): \b
-RegexBuilder: BuildRegex(): Hello\s+World!\bRegex(?:Builder|Toolbox)\b
+RegexBuilder: BuildRegex(): \bRegex(?:Builder|Toolbox)\b
 ```
 
 ---

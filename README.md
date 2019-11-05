@@ -13,7 +13,41 @@ Regular expression tools for .NET developers.
  - Code is easier to read, understand and maintain.
  - Code is safer and far less prone to regular expression syntax errors and programmer errors.
 
-It is fully documented in the [project wiki](https://github.com/markwhitaker/RegexToolbox.NET/wiki).
+Here's an example:
+
+```c#
+var regex = new RegexBuilder()
+    .Text("Hello")
+    .Whitespace(RegexQuantifier.OneOrMore)
+    .Text("world!")
+    .BuildRegex();
+```
+
+But that's just a taste of what `RegexBuilder` does: for full API documentation, head over to the [project wiki](https://github.com/markwhitaker/RegexToolbox.NET/wiki).
+
+## New in 1.2.2: Logging
+
+Use the new `AddLogger()` method to connect a logger of your choice and see how your regex is built, step by step. For example:
+
+```c#
+var regex = new RegexBuilder()
+    .AddLogger(Console.WriteLine)
+    .WordBoundary()
+    .Text("Regex")
+    .AnyOf("Builder", "Toolbox")
+    .WordBoundary()
+    .BuildRegex();
+```
+
+will output this to your console:
+
+```text
+RegexBuilder: WordBoundary(): \b
+RegexBuilder: Text("Regex"): Regex
+RegexBuilder: AnyOf("Builder", "Toolbox"): (?:Builder|Toolbox)
+RegexBuilder: WordBoundary(): \b
+RegexBuilder: BuildRegex(): Hello\s+World!\bRegex(?:Builder|Toolbox)\b
+```
 
 ---
 ![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.Java/master/artwork/RegexToolbox-icon-32.png) **Java developer?** Check out the Java version of this library, [RegexToolbox.Java](https://github.com/markwhitaker/RegexToolbox.Java).

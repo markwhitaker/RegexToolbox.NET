@@ -675,5 +675,27 @@ namespace RegexToolbox.Tests
             _regexBuilder.AnyCharacter(RegexQuantifier.Between(10, 20).ButAsFewAsPossible);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(Between(10, 20).ButAsFewAsPossible) => .{10,20}?", _logOutput);
         }
+
+        [Test]
+        public void TestBuildRegex()
+        {
+            _regexBuilder
+                .Text("hello")
+                .Whitespace(RegexQuantifier.OneOrMore)
+                .Text("world")
+                .BuildRegex();
+            Assert.AreEqual(@"RegexBuilder: BuildRegex() => hello\s+world", _logOutput);
+        }
+
+        [Test]
+        public void TestBuildRegexWithOptions()
+        {
+            _regexBuilder
+                .Text("hello")
+                .Whitespace(RegexQuantifier.OneOrMore)
+                .Text("world")
+                .BuildRegex(RegexOptions.Multiline, RegexOptions.IgnoreCase);
+            Assert.AreEqual(@"RegexBuilder: BuildRegex() => hello\s+world", _logOutput);
+        }
     }
 }

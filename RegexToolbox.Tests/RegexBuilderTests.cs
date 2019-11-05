@@ -2642,10 +2642,10 @@ namespace RegexToolbox.Tests
 
             Received.InOrder(() =>
             {
-                logger.Log(@"RegexBuilder: Adding part: hello");
-                logger.Log(@"RegexBuilder: Adding part: \s+");
-                logger.Log(@"RegexBuilder: Adding part: (?:world)?");
-                logger.Log(@"RegexBuilder: Building regex: hello\s+(?:world)?");
+                logger.Log("RegexBuilder: Text(\"hello\") => hello");
+                logger.Log("RegexBuilder: Whitespace(OneOrMore) => \\s+");
+                logger.Log("RegexBuilder: Text(\"world\", ZeroOrOne) => (?:world)?");
+                logger.Log("RegexBuilder: BuildRegex() => hello\\s+(?:world)?");
             });
         }
 
@@ -2663,10 +2663,10 @@ namespace RegexToolbox.Tests
 
             Received.InOrder(() =>
             {
-                logger.Log(@"TEST: Adding part: hello");
-                logger.Log(@"TEST: Adding part: \s+");
-                logger.Log(@"TEST: Adding part: (?:world)?");
-                logger.Log(@"TEST: Building regex: hello\s+(?:world)?");
+                logger.Log("TEST: Text(\"hello\") => hello");
+                logger.Log("TEST: Whitespace(OneOrMore) => \\s+");
+                logger.Log("TEST: Text(\"world\", ZeroOrOne) => (?:world)?");
+                logger.Log("TEST: BuildRegex() => hello\\s+(?:world)?");
             });
         }
 
@@ -2683,10 +2683,10 @@ namespace RegexToolbox.Tests
                 .BuildRegex();
 
             Assert.AreEqual(4, list.Count);
-            Assert.AreEqual(@"RegexBuilder: Adding part: hello", list[0]);
-            Assert.AreEqual(@"RegexBuilder: Adding part: \s+", list[1]);
-            Assert.AreEqual(@"RegexBuilder: Adding part: (?:world)?", list[2]);
-            Assert.AreEqual(@"RegexBuilder: Building regex: hello\s+(?:world)?", list[3]);
+            Assert.AreEqual("RegexBuilder: Text(\"hello\") => hello", list[0]);
+            Assert.AreEqual("RegexBuilder: Whitespace(OneOrMore) => \\s+", list[1]);
+            Assert.AreEqual("RegexBuilder: Text(\"world\", ZeroOrOne) => (?:world)?", list[2]);
+            Assert.AreEqual("RegexBuilder: BuildRegex() => hello\\s+(?:world)?", list[3]);
         }
 
         [Test]
@@ -2702,10 +2702,10 @@ namespace RegexToolbox.Tests
                 .BuildRegex();
 
             Assert.AreEqual(4, list.Count);
-            Assert.AreEqual(@"TEST: Adding part: hello", list[0]);
-            Assert.AreEqual(@"TEST: Adding part: \s+", list[1]);
-            Assert.AreEqual(@"TEST: Adding part: (?:world)?", list[2]);
-            Assert.AreEqual(@"TEST: Building regex: hello\s+(?:world)?", list[3]);
+            Assert.AreEqual("TEST: Text(\"hello\") => hello", list[0]);
+            Assert.AreEqual("TEST: Whitespace(OneOrMore) => \\s+", list[1]);
+            Assert.AreEqual("TEST: Text(\"world\", ZeroOrOne) => (?:world)?", list[2]);
+            Assert.AreEqual("TEST: BuildRegex() => hello\\s+(?:world)?", list[3]);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using NSubstitute;
+﻿using System.Text.RegularExpressions;
 using NUnit.Framework;
 using Match = System.Text.RegularExpressions.Match;
 
@@ -2626,86 +2624,6 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.Ipv4Address));
             Assert.IsTrue(regex.IsMatch(Strings.Ipv6Address));
             Assert.IsTrue(regex.IsMatch(Strings.MacAddress));
-        }
-
-        [Test]
-        public void TestAddLoggerInterface()
-        {
-            var logger = Substitute.For<RegexBuilder.ILogger>();
-
-            new RegexBuilder()
-                .AddLogger(logger)
-                .Text("hello")
-                .Whitespace(RegexQuantifier.OneOrMore)
-                .Text("world", RegexQuantifier.ZeroOrOne)
-                .BuildRegex();
-
-            Received.InOrder(() =>
-            {
-                logger.Log("RegexBuilder: Text(\"hello\") => hello");
-                logger.Log("RegexBuilder: Whitespace(OneOrMore) => \\s+");
-                logger.Log("RegexBuilder: Text(\"world\", ZeroOrOne) => (?:world)?");
-                logger.Log("RegexBuilder: BuildRegex() => hello\\s+(?:world)?");
-            });
-        }
-
-        [Test]
-        public void TestAddLoggerInterfaceWithTag()
-        {
-            var logger = Substitute.For<RegexBuilder.ILogger>();
-
-            new RegexBuilder()
-                .AddLogger(logger, "TEST")
-                .Text("hello")
-                .Whitespace(RegexQuantifier.OneOrMore)
-                .Text("world", RegexQuantifier.ZeroOrOne)
-                .BuildRegex();
-
-            Received.InOrder(() =>
-            {
-                logger.Log("TEST: Text(\"hello\") => hello");
-                logger.Log("TEST: Whitespace(OneOrMore) => \\s+");
-                logger.Log("TEST: Text(\"world\", ZeroOrOne) => (?:world)?");
-                logger.Log("TEST: BuildRegex() => hello\\s+(?:world)?");
-            });
-        }
-
-        [Test]
-        public void TestAddLoggerLambda()
-        {
-            var list = new List<string>();
-            
-            new RegexBuilder()
-                .AddLogger(s => list.Add(s))
-                .Text("hello")
-                .Whitespace(RegexQuantifier.OneOrMore)
-                .Text("world", RegexQuantifier.ZeroOrOne)
-                .BuildRegex();
-
-            Assert.AreEqual(4, list.Count);
-            Assert.AreEqual("RegexBuilder: Text(\"hello\") => hello", list[0]);
-            Assert.AreEqual("RegexBuilder: Whitespace(OneOrMore) => \\s+", list[1]);
-            Assert.AreEqual("RegexBuilder: Text(\"world\", ZeroOrOne) => (?:world)?", list[2]);
-            Assert.AreEqual("RegexBuilder: BuildRegex() => hello\\s+(?:world)?", list[3]);
-        }
-
-        [Test]
-        public void TestAddLoggerLambdaWithTag()
-        {
-            var list = new List<string>();
-            
-            new RegexBuilder()
-                .AddLogger(s => list.Add(s), "TEST")
-                .Text("hello")
-                .Whitespace(RegexQuantifier.OneOrMore)
-                .Text("world", RegexQuantifier.ZeroOrOne)
-                .BuildRegex();
-
-            Assert.AreEqual(4, list.Count);
-            Assert.AreEqual("TEST: Text(\"hello\") => hello", list[0]);
-            Assert.AreEqual("TEST: Whitespace(OneOrMore) => \\s+", list[1]);
-            Assert.AreEqual("TEST: Text(\"world\", ZeroOrOne) => (?:world)?", list[2]);
-            Assert.AreEqual("TEST: BuildRegex() => hello\\s+(?:world)?", list[3]);
         }
     }
 }

@@ -364,9 +364,9 @@ namespace RegexToolbox
             }
 
             var joinedStrings = string.Join(", ", stringsList.Select(s => $"\"{s}\""));
-            var method = quantifier == null ? $"AnyOf({joinedStrings})" : $"AnyOf([{joinedStrings}], {quantifier.Name})";
-            return (stringsList.Count == 1)
-                ? AddPart(method, MakeSafeForRegex(stringsList[0]), quantifier)
+            var method = quantifier == null ? $"AnyOf({joinedStrings})" : $"AnyOf({joinedStrings}, {quantifier.Name})";
+            return (stringsList.Count == 1 && quantifier == null)
+                ? AddPart(method, MakeSafeForRegex(stringsList[0]))
                 : AddPartInNonCapturingGroup(method, string.Join("|", stringsList.Select(MakeSafeForRegex)), quantifier);
         }
 

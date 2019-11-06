@@ -25,7 +25,7 @@ var regex = new RegexBuilder()
 
 But that's just a taste of what `RegexBuilder` does: for full API documentation, head over to the [project wiki](https://github.com/markwhitaker/RegexToolbox.NET/wiki).
 
-## New in 1.2.2: Logging
+## New in 1.3: Logging
 
 Use the new `AddLogger()` method to connect a logger of your choice and see how your regex is built, step by step. For example:
 

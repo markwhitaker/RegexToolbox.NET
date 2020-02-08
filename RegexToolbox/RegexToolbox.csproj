@@ -15,8 +15,4 @@
         <Company>Mainwave</Company>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="GitVersionTask" Version="5.0.1" />
-    </ItemGroup>
-
 </Project>

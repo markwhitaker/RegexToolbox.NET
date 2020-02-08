@@ -1,6 +1,6 @@
 ![icon](Artwork/RegexToolbox-icon-100.png)
 
-# RegexToolbox.NET [![CircleCI](https://circleci.com/gh/markwhitaker/RegexToolbox.NET.svg?style=shield)](https://circleci.com/gh/markwhitaker/RegexToolbox.NET) [![NuGet Version and Downloads count](https://buildstats.info/nuget/RegexToolbox)](https://www.nuget.org/packages/RegexToolbox/)
+# RegexToolbox.NET [![GitHub Actions build](https://github.com/markwhitaker/RegexToolbox.NET/workflows/Build%20and%20test/badge.svg)](https://github.com/markwhitaker/RegexToolbox.NET/actions) [![NuGet Version and Downloads count](https://buildstats.info/nuget/RegexToolbox)](https://www.nuget.org/packages/RegexToolbox/)
 
 Regular expression tools for .NET developers.
 

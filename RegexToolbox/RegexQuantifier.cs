@@ -35,12 +35,6 @@ namespace RegexToolbox
         /// <summary>
         /// Quantifier to match the preceding element once or not at all
         /// </summary>
-        [Obsolete("use ZeroOrOne instead")]
-        public static RegexGreedyQuantifier NoneOrOne => new RegexGreedyQuantifier("NoneOrOne", "?");
-
-        /// <summary>
-        /// Quantifier to match the preceding element once or not at all
-        /// </summary>
         public static RegexGreedyQuantifier ZeroOrOne => new RegexGreedyQuantifier("ZeroOrOne", "?");
 
         #endregion

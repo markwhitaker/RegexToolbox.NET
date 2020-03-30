@@ -6,7 +6,7 @@ using RegexToolbox.Extensions;
 namespace RegexToolbox.Tests.Extensions
 {
     [TestFixture]
-    public class RegexExtensionsTests
+    public class StringExtensionsTests
     {
         [Test]
         public void GivenInputStringContainingOneRegexMatch_WhenRemove_ThenMatchIsRemovedFromString()
@@ -19,7 +19,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When
-            var actualResult = regex.Remove(input);
+            var actualResult = input.Remove(regex);
             
             // Then
             Assert.That(actualResult, Is.EqualTo("Hello friendly world"));
@@ -36,7 +36,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When
-            var actualResult = regex.Remove(input);
+            var actualResult = input.Remove(regex);
             
             // Then
             Assert.That(actualResult, Is.EqualTo("Hello"));
@@ -53,7 +53,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When
-            var actualResult = regex.RemoveFirst(input);
+            var actualResult = input.RemoveFirst(regex);
             
             // Then
             Assert.That(actualResult, Is.EqualTo("Hello friendly world"));
@@ -70,7 +70,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When
-            var actualResult = regex.RemoveLast(input);
+            var actualResult = input.RemoveLast(regex);
             
             // Then
             Assert.That(actualResult, Is.EqualTo("Hello there friendly"));
@@ -86,7 +86,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When
-            var actualResult = regex.Remove(input);
+            var actualResult = input.Remove(regex);
             
             // Then
             Assert.That(actualResult, Is.EqualTo(input));
@@ -102,7 +102,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When
-            var actualResult = regex.RemoveFirst(input);
+            var actualResult = input.RemoveFirst(regex);
             
             // Then
             Assert.That(actualResult, Is.EqualTo(input));
@@ -118,7 +118,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When
-            var actualResult = regex.RemoveLast(input);
+            var actualResult = input.RemoveLast(regex);
             
             // Then
             Assert.That(actualResult, Is.EqualTo(input));
@@ -134,7 +134,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When/Then
-            var exception = Assert.Throws<ArgumentNullException>(() => regex.Remove(input));
+            var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
             
             // Then
             Assert.That(exception.ParamName, Is.EqualTo("input"));
@@ -150,7 +150,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When/Then
-            var exception = Assert.Throws<ArgumentNullException>(() => regex.RemoveFirst(input));
+            var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
             
             // Then
             Assert.That(exception.ParamName, Is.EqualTo("input"));
@@ -166,7 +166,7 @@ namespace RegexToolbox.Tests.Extensions
                 .BuildRegex();
 
             // When/Then
-            var exception = Assert.Throws<ArgumentNullException>(() => regex.RemoveLast(input));
+            var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
             
             // Then
             Assert.That(exception.ParamName, Is.EqualTo("input"));
@@ -181,7 +181,7 @@ namespace RegexToolbox.Tests.Extensions
             
             // When/Then
             // ReSharper disable once ExpressionIsAlwaysNull
-            var exception = Assert.Throws<ArgumentNullException>(() => regex.Remove(input));
+            var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
             
             // Then
             Assert.That(exception.ParamName, Is.EqualTo("regex"));
@@ -196,7 +196,7 @@ namespace RegexToolbox.Tests.Extensions
             
             // When/Then
             // ReSharper disable once ExpressionIsAlwaysNull
-            var exception = Assert.Throws<ArgumentNullException>(() => regex.RemoveFirst(input));
+            var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
             
             // Then
             Assert.That(exception.ParamName, Is.EqualTo("regex"));
@@ -211,7 +211,7 @@ namespace RegexToolbox.Tests.Extensions
             
             // When/Then
             // ReSharper disable once ExpressionIsAlwaysNull
-            var exception = Assert.Throws<ArgumentNullException>(() => regex.RemoveLast(input));
+            var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
             
             // Then
             Assert.That(exception.ParamName, Is.EqualTo("regex"));

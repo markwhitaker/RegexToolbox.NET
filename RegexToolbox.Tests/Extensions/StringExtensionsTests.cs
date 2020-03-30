@@ -180,6 +180,7 @@ namespace RegexToolbox.Tests.Extensions
             Regex regex = null;
             
             // When/Then
+            // ReSharper disable once ExpressionIsAlwaysNull
             var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
             
             // Then
@@ -194,6 +195,7 @@ namespace RegexToolbox.Tests.Extensions
             Regex regex = null;
             
             // When/Then
+            // ReSharper disable once ExpressionIsAlwaysNull
             var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
             
             // Then
@@ -208,6 +210,7 @@ namespace RegexToolbox.Tests.Extensions
             Regex regex = null;
             
             // When/Then
+            // ReSharper disable once ExpressionIsAlwaysNull
             var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
             
             // Then

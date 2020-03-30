@@ -89,7 +89,7 @@ namespace RegexToolbox.Tests.Extensions
             var actualResult = input.Remove(regex);
             
             // Then
-            Assert.That(actualResult, Is.EqualTo(input));
+            Assert.That(actualResult, Is.SameAs(input));
         }
 
         [TestCase("Hello world")]
@@ -105,7 +105,7 @@ namespace RegexToolbox.Tests.Extensions
             var actualResult = input.RemoveFirst(regex);
             
             // Then
-            Assert.That(actualResult, Is.EqualTo(input));
+            Assert.That(actualResult, Is.SameAs(input));
         }
 
         [TestCase("Hello world")]
@@ -121,7 +121,7 @@ namespace RegexToolbox.Tests.Extensions
             var actualResult = input.RemoveLast(regex);
             
             // Then
-            Assert.That(actualResult, Is.EqualTo(input));
+            Assert.That(actualResult, Is.SameAs(input));
         }
 
         [Test]

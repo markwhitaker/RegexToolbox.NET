@@ -8,11 +8,22 @@
         <Description>Regular expression tools for .NET developers</Description>
         <Copyright>Mark Whitaker</Copyright>
         <PackageProjectUrl>https://github.com/markwhitaker/RegexToolbox.NET</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/markwhitaker/RegexToolbox.NET/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIconUrl>https://raw.githubusercontent.com/markwhitaker/RegexToolbox.NET/master/Artwork/RegexToolbox-icon-100.png</PackageIconUrl>
+        <PackageIcon>RegexToolbox-icon-128.png</PackageIcon>
         <Repository>https://github.com/markwhitaker/RegexToolbox.NET</Repository>
         <RepositoryType>Git</RepositoryType>
         <Company>Mainwave</Company>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="icon\RegexToolbox-icon-128.png" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\LICENSE" Pack="true" PackagePath="\">
+        <Link>LICENSE</Link>
+      </None>
+    </ItemGroup>
 
 </Project>

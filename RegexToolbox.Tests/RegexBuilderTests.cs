@@ -1,6 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using NUnit.Framework;
-using Match = System.Text.RegularExpressions.Match;
+﻿using NUnit.Framework;
+using static RegexToolbox.RegexQuantifier;
 
 namespace RegexToolbox.Tests
 {
@@ -47,7 +46,7 @@ namespace RegexToolbox.Tests
         public void TestSimpleTextWithQuantifier()
         {
             var regex = new RegexBuilder()
-                .Text("cat", RegexQuantifier.Exactly(2))
+                .Text("cat", Exactly(2))
                 .BuildRegex();
 
             Assert.AreEqual("(?:cat){2}", regex.ToString());
@@ -1331,7 +1330,7 @@ namespace RegexToolbox.Tests
         {
             var strings = new[] {"cat", "dog", "|"};
             var regex = new RegexBuilder()
-                .AnyOf(strings, RegexQuantifier.Exactly(2))
+                .AnyOf(strings, Exactly(2))
                 .BuildRegex();
 
             Assert.AreEqual(@"(?:cat|dog|\|){2}", regex.ToString());
@@ -1523,16 +1522,24 @@ namespace RegexToolbox.Tests
         public void TestSingleGroup()
         {
             var regex = new RegexBuilder()
-                .AnyCharacter(RegexQuantifier.ZeroOrMore)
+                .AnyCharacter(ZeroOrMore)
+                .Group(r => r
+                    .Letter()
+                    .Digit())
+                .BuildRegex();
+
+            var oldSyntaxRegex = new RegexBuilder()
+                .AnyCharacter(ZeroOrMore)
                 .StartGroup()
                     .Letter()
                     .Digit()
                 .EndGroup()
                 .BuildRegex();
 
+            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@".*(\p{L}\d)", regex.ToString());
 
-            Match match = regex.Match("Class A1");
+            var match = regex.Match("Class A1");
             Assert.IsTrue(match.Success);
             Assert.AreEqual("Class A1", match.Groups[0].Value);
             Assert.AreEqual("A1", match.Groups[1].Value);
@@ -1577,15 +1584,22 @@ namespace RegexToolbox.Tests
         public void TestRepeatGroup()
         {
             var regex = new RegexBuilder()
+                .Group(r => r
+                    .Letter()
+                    .Digit())
+                .BuildRegex();
+
+            var oldSyntaxRegex = new RegexBuilder()
                 .StartGroup()
                     .Letter()
                     .Digit()
                 .EndGroup()
                 .BuildRegex();
 
+            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@"(\p{L}\d)", regex.ToString());
 
-            MatchCollection matches = regex.Matches("Class A1 f2 ZZ88");
+            var matches = regex.Matches("Class A1 f2 ZZ88");
             Assert.AreEqual(3, matches.Count);
             Assert.AreEqual("A1", matches[0].Value);
             Assert.AreEqual("f2", matches[1].Value);
@@ -1618,16 +1632,24 @@ namespace RegexToolbox.Tests
         public void TestNamedGroup()
         {
             var regex = new RegexBuilder()
-                .LowercaseLetter(RegexQuantifier.OneOrMore)
-                .StartNamedGroup("test123")
-                    .Digit(RegexQuantifier.OneOrMore)
-                .EndGroup()
-                .LowercaseLetter(RegexQuantifier.OneOrMore)
+                .LowercaseLetter(OneOrMore)
+                .NamedGroup("test123", r => r
+                    .Digit(OneOrMore))
+                .LowercaseLetter(OneOrMore)
                 .BuildRegex();
 
+            var oldSyntaxRegex = new RegexBuilder()
+                .LowercaseLetter(OneOrMore)
+                .StartNamedGroup("test123")
+                    .Digit(OneOrMore)
+                .EndGroup()
+                .LowercaseLetter(OneOrMore)
+                .BuildRegex();
+
+            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@"\p{Ll}+(?<test123>\d+)\p{Ll}+", regex.ToString());
 
-            Match match = regex.Match("a99z");
+            var match = regex.Match("a99z");
             Assert.IsTrue(match.Success);
             Assert.AreEqual("a99z", match.Groups[0].Value);
             Assert.AreEqual("99", match.Groups[1].Value);
@@ -1660,16 +1682,24 @@ namespace RegexToolbox.Tests
         public void TestNonCapturingGroup()
         {
             var regex = new RegexBuilder()
-                .LowercaseLetter(RegexQuantifier.OneOrMore)
-                .StartNonCapturingGroup()
-                    .Digit(RegexQuantifier.OneOrMore)
-                .EndGroup()
-                .LowercaseLetter(RegexQuantifier.OneOrMore)
+                .LowercaseLetter(OneOrMore)
+                .NonCapturingGroup(r => r
+                    .Digit(OneOrMore))
+                .LowercaseLetter(OneOrMore)
                 .BuildRegex();
 
+            var oldSyntaxRegex = new RegexBuilder()
+                .LowercaseLetter(OneOrMore)
+                .StartNonCapturingGroup()
+                    .Digit(OneOrMore)
+                .EndGroup()
+                .LowercaseLetter(OneOrMore)
+                .BuildRegex();
+
+            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@"\p{Ll}+(?:\d+)\p{Ll}+", regex.ToString());
 
-            Match match = regex.Match("a99z");
+            var match = regex.Match("a99z");
             Assert.IsTrue(match.Success);
             Assert.AreEqual("a99z", match.Groups[0].Value);
             Assert.AreEqual(string.Empty, match.Groups[1].Value);
@@ -1704,8 +1734,16 @@ namespace RegexToolbox.Tests
         public void TestMultipleGroups()
         {
             var regex = new RegexBuilder()
+                .Group(r => r
+                    .AnyCharacter(ZeroOrMore))
+                .Group(r => r
+                    .Letter()
+                    .Digit())
+                .BuildRegex();
+
+            var oldSyntaxRegex = new RegexBuilder()
                 .StartGroup()
-                    .AnyCharacter(RegexQuantifier.ZeroOrMore)
+                    .AnyCharacter(ZeroOrMore)
                 .EndGroup()
                 .StartGroup()
                     .Letter()
@@ -1713,9 +1751,10 @@ namespace RegexToolbox.Tests
                 .EndGroup()
                 .BuildRegex();
 
+            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@"(.*)(\p{L}\d)", regex.ToString());
 
-            Match match = regex.Match("Class A1");
+            var match = regex.Match("Class A1");
             Assert.IsTrue(match.Success);
             Assert.AreEqual("Class A1", match.Groups[0].Value);
             Assert.AreEqual("Class ", match.Groups[1].Value);
@@ -1764,8 +1803,19 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .AnyCharacter() // Omit first character from groups
+                .Group(r => r
+                    .AnyCharacter(ZeroOrMore)
+                    .Group(r2 => r2
+                        .Letter()
+                        .Digit()
+                    )
+                )
+                .BuildRegex();
+
+            var oldSyntaxRegex = new RegexBuilder()
+                .AnyCharacter() // Omit first character from groups
                 .StartGroup()
-                    .AnyCharacter(RegexQuantifier.ZeroOrMore)
+                    .AnyCharacter(ZeroOrMore)
                     .StartGroup()
                         .Letter()
                         .Digit()
@@ -1773,9 +1823,10 @@ namespace RegexToolbox.Tests
                 .EndGroup()
                 .BuildRegex();
 
+            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@".(.*(\p{L}\d))", regex.ToString());
 
-            Match match = regex.Match("Class A1");
+            var match = regex.Match("Class A1");
             Assert.IsTrue(match.Success);
             Assert.AreEqual("Class A1", match.Groups[0].Value);
             Assert.AreEqual("lass A1", match.Groups[1].Value);
@@ -1824,7 +1875,7 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .Letter()
-                .Digit(RegexQuantifier.ZeroOrMore)
+                .Digit(ZeroOrMore)
                 .Letter()
                 .BuildRegex();
 
@@ -1865,7 +1916,7 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .Letter()
-                .Digit(RegexQuantifier.OneOrMore)
+                .Digit(OneOrMore)
                 .Letter()
                 .BuildRegex();
 
@@ -1906,7 +1957,7 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .Letter()
-                .Digit(RegexQuantifier.ZeroOrOne)
+                .Digit(ZeroOrOne)
                 .Letter()
                 .BuildRegex();
 
@@ -1947,7 +1998,7 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .Letter()
-                .Digit(RegexQuantifier.Exactly(3))
+                .Digit(Exactly(3))
                 .Letter()
                 .BuildRegex();
 
@@ -1991,7 +2042,7 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .Letter()
-                .Digit(RegexQuantifier.AtLeast(3))
+                .Digit(AtLeast(3))
                 .Letter()
                 .BuildRegex();
 
@@ -2035,7 +2086,7 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .Letter()
-                .Digit(RegexQuantifier.NoMoreThan(3))
+                .Digit(NoMoreThan(3))
                 .Letter()
                 .BuildRegex();
 
@@ -2079,7 +2130,7 @@ namespace RegexToolbox.Tests
         {
             var regex = new RegexBuilder()
                 .Letter()
-                .Digit(RegexQuantifier.Between(2, 4))
+                .Digit(Between(2, 4))
                 .Letter()
                 .BuildRegex();
 
@@ -2208,11 +2259,11 @@ namespace RegexToolbox.Tests
             // Very basic e-mail address checker!
             var regex = new RegexBuilder()
                 .StartOfString()
-                .NonWhitespace(RegexQuantifier.AtLeast(2))
+                .NonWhitespace(AtLeast(2))
                 .Text("@")
-                .NonWhitespace(RegexQuantifier.AtLeast(2))
+                .NonWhitespace(AtLeast(2))
                 .Text(".")
-                .NonWhitespace(RegexQuantifier.AtLeast(2))
+                .NonWhitespace(AtLeast(2))
                 .EndOfString()
                 .BuildRegex();
 
@@ -2256,9 +2307,9 @@ namespace RegexToolbox.Tests
             // Very basic URL checker!
             var regex = new RegexBuilder()
                 .Text("http")
-                .Text("s", RegexQuantifier.ZeroOrOne)
+                .Text("s", ZeroOrOne)
                 .Text("://")
-                .NonWhitespace(RegexQuantifier.OneOrMore)
+                .NonWhitespace(OneOrMore)
                 .AnyCharacterFrom("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_/") // Valid last characters
                 .BuildRegex();
 
@@ -2268,7 +2319,7 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch("www.mainwave.co.uk"));
             Assert.IsFalse(regex.IsMatch("ftp://www.mainwave.co.uk"));
 
-            Match match = regex.Match("Go to http://www.mainwave.co.uk. Then click the link.");
+            var match = regex.Match("Go to http://www.mainwave.co.uk. Then click the link.");
             Assert.IsTrue(match.Success);
             Assert.AreEqual("http://www.mainwave.co.uk", match.Value);
 
@@ -2314,11 +2365,11 @@ namespace RegexToolbox.Tests
             // (doesn't check values are in range, for example)
             var regex = new RegexBuilder()
                 .StartOfString()
-                .StartGroup()
-                    .Digit(RegexQuantifier.Between(1, 3))
-                    .Text(".")
-                .EndGroup(RegexQuantifier.Exactly(3))
-                .Digit(RegexQuantifier.Between(1, 3))
+                .Group(r => r
+                    .Digit(Between(1, 3))
+                    .Text("."),
+                    Exactly(3))
+                .Digit(Between(1, 3))
                 .EndOfString()
                 .BuildRegex();
 
@@ -2420,7 +2471,7 @@ namespace RegexToolbox.Tests
         public void TestZeroOrMoreButAsFewAsPossible()
         {
             var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.ZeroOrMore.ButAsFewAsPossible)
+                .Digit(ZeroOrMore.ButAsFewAsPossible)
                 .BuildRegex();
 
             Assert.AreEqual(@"\d*?", regex.ToString());
@@ -2455,7 +2506,7 @@ namespace RegexToolbox.Tests
         public void TestOneOrMoreButAsFewAsPossible()
         {
             var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.OneOrMore.ButAsFewAsPossible)
+                .Digit(OneOrMore.ButAsFewAsPossible)
                 .BuildRegex();
 
             Assert.AreEqual(@"\d+?", regex.ToString());
@@ -2490,7 +2541,7 @@ namespace RegexToolbox.Tests
         public void TestAtLeastButAsFewAsPossible()
         {
             var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.AtLeast(1).ButAsFewAsPossible)
+                .Digit(AtLeast(1).ButAsFewAsPossible)
                 .BuildRegex();
 
             Assert.AreEqual(@"\d{1,}?", regex.ToString());
@@ -2525,7 +2576,7 @@ namespace RegexToolbox.Tests
         public void TestBetweenButAsFewAsPossible()
         {
             var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.Between(2, 100).ButAsFewAsPossible)
+                .Digit(Between(2, 100).ButAsFewAsPossible)
                 .BuildRegex();
 
             Assert.AreEqual(@"\d{2,100}?", regex.ToString());
@@ -2560,7 +2611,7 @@ namespace RegexToolbox.Tests
         public void TestNoMoreThanButAsFewAsPossible()
         {
             var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.NoMoreThan(2).ButAsFewAsPossible)
+                .Digit(NoMoreThan(2).ButAsFewAsPossible)
                 .BuildRegex();
 
             Assert.AreEqual(@"\d{0,2}?", regex.ToString());
@@ -2595,7 +2646,7 @@ namespace RegexToolbox.Tests
         public void TestNoneOrOneButAsFewAsPossible()
         {
             var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.ZeroOrOne.ButAsFewAsPossible)
+                .Digit(ZeroOrOne.ButAsFewAsPossible)
                 .BuildRegex();
 
             Assert.AreEqual(@"\d??", regex.ToString());

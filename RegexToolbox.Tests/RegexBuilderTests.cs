@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using static RegexToolbox.RegexQuantifier;
 
 namespace RegexToolbox.Tests
@@ -1371,23 +1372,94 @@ namespace RegexToolbox.Tests
         }
 
         [Test]
-        public void TestAnyOfNullEmptyOrSingle()
+        public void TestAnyOfNull()
         {
-            var anyOfNullRegex = new RegexBuilder()
-                .AnyOf(null)
-                .BuildRegex();
+            var exception = Assert.Throws<RegexBuilderException>(() =>
+                new RegexBuilder().AnyOf((string[])null));
+            Assert.AreEqual(@"No parameters passed to AnyOf", exception.Message);
+        }
 
-            var anyOfEmptyRegex = new RegexBuilder()
-                .AnyOf(new string[] { })
-                .BuildRegex();
+        [Test]
+        public void TestAnyOfEmpty()
+        {
+            var exception = Assert.Throws<RegexBuilderException>(() =>
+                new RegexBuilder().AnyOf(new string[] { }));
+            Assert.AreEqual(@"No parameters passed to AnyOf", exception.Message);
+        }
 
+        [Test]
+        public void TestAnyOfSingle()
+        {
             var anyOfSingleRegex = new RegexBuilder()
-                .AnyOf(new []{"cat"})
+                .AnyOf("cat")
                 .BuildRegex();
 
-            Assert.AreEqual(string.Empty, anyOfNullRegex.ToString());
-            Assert.AreEqual(string.Empty, anyOfEmptyRegex.ToString());
             Assert.AreEqual("cat", anyOfSingleRegex.ToString());
+        }
+
+        [Test]
+        public void TestAnyOfRegexesNull()
+        {
+            var exception = Assert.Throws<RegexBuilderException>(() =>
+                new RegexBuilder().AnyOf((Func<RegexBuilder, RegexBuilder>[])null));
+            Assert.AreEqual(@"No parameters passed to AnyOf", exception.Message);
+        }
+
+        [Test]
+        public void TestAnyOfRegexesEmpty()
+        {
+            var exception = Assert.Throws<RegexBuilderException>(() =>
+                new RegexBuilder().AnyOf(new Func<RegexBuilder, RegexBuilder>[] { }));
+            Assert.AreEqual(@"No parameters passed to AnyOf", exception.Message);
+        }
+
+        [Test]
+        public void TestAnyOfRegexesSingle()
+        {
+            var regex = new RegexBuilder().AnyOf(r => r
+                .Text("cat"))
+                .BuildRegex();
+
+            Assert.AreEqual(@"cat", regex.ToString());
+        }
+
+        [Test]
+        public void TestAnyOfRegexesMultiple()
+        {
+            var regex = new RegexBuilder()
+                .Text("<")
+                .AnyOf(
+                    r => r.Letter(Exactly(2)),
+                    r => r.Digit(Exactly(2)))
+                .Text(">")
+                .BuildRegex();
+
+            Assert.AreEqual(@"<(?:\p{L}{2}|\d{2})>", regex.ToString());
+            Assert.IsTrue(regex.IsMatch("<ab> at the start"));
+            Assert.IsTrue(regex.IsMatch("<AB> at the start"));
+            Assert.IsTrue(regex.IsMatch("<12> at the start"));
+            Assert.IsTrue(regex.IsMatch("has <mn> in the middle"));
+            Assert.IsTrue(regex.IsMatch("has <MN> in the middle"));
+            Assert.IsTrue(regex.IsMatch("has <56> in the middle"));
+            Assert.IsTrue(regex.IsMatch("ends with <yz>"));
+            Assert.IsTrue(regex.IsMatch("ends with <YZ>"));
+            Assert.IsTrue(regex.IsMatch("ends with <90>"));
+            Assert.IsFalse(regex.IsMatch("ab at the start"));
+            Assert.IsFalse(regex.IsMatch("<a> at the start"));
+            Assert.IsFalse(regex.IsMatch("<abc> at the start"));
+            Assert.IsFalse(regex.IsMatch("<1> at the start"));
+            Assert.IsFalse(regex.IsMatch("<123> at the start"));
+            Assert.IsFalse(regex.IsMatch("has mn in the middle"));
+            Assert.IsFalse(regex.IsMatch("has <m> in the middle"));
+            Assert.IsFalse(regex.IsMatch("has <mno> in the middle"));
+            Assert.IsFalse(regex.IsMatch("has <5> in the middle"));
+            Assert.IsFalse(regex.IsMatch("has <456> in the middle"));
+            Assert.IsFalse(regex.IsMatch("ends with yz"));
+            Assert.IsFalse(regex.IsMatch("ends with <z>"));
+            Assert.IsFalse(regex.IsMatch("ends with <xyz>"));
+            Assert.IsFalse(regex.IsMatch("ends with 90"));
+            Assert.IsFalse(regex.IsMatch("ends with <0>"));
+            Assert.IsFalse(regex.IsMatch("ends with <890>"));
         }
 
         [Test]

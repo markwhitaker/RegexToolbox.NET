@@ -16,7 +16,7 @@ namespace RegexToolbox.Tests
             _logOutput = string.Empty;
             _regexBuilder = new RegexBuilder().AddLogger(s => _logOutput = s);
         }
-        
+
         [Test]
         public void TestAddLoggerInterface()
         {
@@ -63,7 +63,7 @@ namespace RegexToolbox.Tests
         public void TestAddLoggerLambda()
         {
             var list = new List<string>();
-            
+
             new RegexBuilder()
                 .AddLogger(s => list.Add(s))
                 .Text("hello")
@@ -82,7 +82,7 @@ namespace RegexToolbox.Tests
         public void TestAddLoggerLambdaWithTag()
         {
             var list = new List<string>();
-            
+
             new RegexBuilder()
                 .AddLogger(s => list.Add(s), "TEST")
                 .Text("hello")
@@ -124,7 +124,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.RegexText("[a-z]", RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: RegexText(""[a-z]"", ZeroOrMore): (?:[a-z])*", _logOutput);
         }
-        
+
         [Test]
         public void TestAnyCharacter()
         {
@@ -138,7 +138,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.AnyCharacter(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(ZeroOrMore): .*", _logOutput);
         }
-        
+
         [Test]
         public void TestWhitespace()
         {
@@ -152,7 +152,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.Whitespace(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: Whitespace(ZeroOrMore): \s*", _logOutput);
         }
-        
+
         [Test]
         public void TestNonWhitespace()
         {
@@ -166,14 +166,14 @@ namespace RegexToolbox.Tests
             _regexBuilder.NonWhitespace(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: NonWhitespace(ZeroOrMore): \S*", _logOutput);
         }
-        
+
         [Test]
         public void TestPossibleWhitespace()
         {
             _regexBuilder.PossibleWhitespace();
             Assert.AreEqual(@"RegexBuilder: PossibleWhitespace(): \s*", _logOutput);
         }
-        
+
         [Test]
         public void TestSpace()
         {
@@ -187,7 +187,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.Space(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: Space(ZeroOrMore):  *", _logOutput);
         }
-        
+
         [Test]
         public void TestTab()
         {
@@ -201,7 +201,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.Tab(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: Tab(ZeroOrMore): \t*", _logOutput);
         }
-        
+
         [Test]
         public void TestLineFeed()
         {
@@ -215,7 +215,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.LineFeed(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: LineFeed(ZeroOrMore): \n*", _logOutput);
         }
-        
+
         [Test]
         public void TestCarriageReturn()
         {
@@ -229,7 +229,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.CarriageReturn(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: CarriageReturn(ZeroOrMore): \r*", _logOutput);
         }
-        
+
         [Test]
         public void TestDigit()
         {
@@ -243,7 +243,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.Digit(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: Digit(ZeroOrMore): \d*", _logOutput);
         }
-        
+
         [Test]
         public void TestNonDigit()
         {
@@ -257,7 +257,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.NonDigit(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: NonDigit(ZeroOrMore): \D*", _logOutput);
         }
-        
+
         [Test]
         public void TestLetter()
         {
@@ -271,7 +271,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.Letter(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: Letter(ZeroOrMore): \p{L}*", _logOutput);
         }
-        
+
         [Test]
         public void TestNonLetter()
         {
@@ -285,7 +285,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.NonLetter(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: NonLetter(ZeroOrMore): \P{L}*", _logOutput);
         }
-        
+
         [Test]
         public void TestUppercaseLetter()
         {
@@ -299,7 +299,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.UppercaseLetter(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: UppercaseLetter(ZeroOrMore): \p{Lu}*", _logOutput);
         }
-        
+
         [Test]
         public void TestLowercaseLetter()
         {
@@ -313,7 +313,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.LowercaseLetter(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: LowercaseLetter(ZeroOrMore): \p{Ll}*", _logOutput);
         }
-        
+
         [Test]
         public void TestLetterOrDigit()
         {
@@ -327,7 +327,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.LetterOrDigit(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: LetterOrDigit(ZeroOrMore): [\p{L}0-9]*", _logOutput);
         }
-        
+
         [Test]
         public void TestNonLetterOrDigit()
         {
@@ -341,7 +341,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.NonLetterOrDigit(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: NonLetterOrDigit(ZeroOrMore): [^\p{L}0-9]*", _logOutput);
         }
-        
+
         [Test]
         public void TestHexDigit()
         {
@@ -355,7 +355,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.HexDigit(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: HexDigit(ZeroOrMore): [0-9A-Fa-f]*", _logOutput);
         }
-        
+
         [Test]
         public void TestUppercaseHexDigit()
         {
@@ -369,7 +369,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.UppercaseHexDigit(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: UppercaseHexDigit(ZeroOrMore): [0-9A-F]*", _logOutput);
         }
-        
+
         [Test]
         public void TestLowercaseHexDigit()
         {
@@ -383,7 +383,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.LowercaseHexDigit(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: LowercaseHexDigit(ZeroOrMore): [0-9a-f]*", _logOutput);
         }
-         
+
         [Test]
         public void TestNonHexDigit()
         {
@@ -397,7 +397,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.NonHexDigit(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: NonHexDigit(ZeroOrMore): [^0-9A-Fa-f]*", _logOutput);
         }
-        
+
         [Test]
         public void TestWordCharacter()
         {
@@ -411,7 +411,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.WordCharacter(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: WordCharacter(ZeroOrMore): [\p{L}0-9_]*", _logOutput);
         }
-        
+
         [Test]
         public void TestNonWordCharacter()
         {
@@ -425,7 +425,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.NonWordCharacter(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: NonWordCharacter(ZeroOrMore): [^\p{L}0-9_]*", _logOutput);
         }
-        
+
         [Test]
         public void TestAnyCharacterFrom()
         {
@@ -439,7 +439,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.AnyCharacterFrom("abc", RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: AnyCharacterFrom(""abc"", ZeroOrMore): [abc]*", _logOutput);
         }
-        
+
         [Test]
         public void TestAnyCharacterExcept()
         {
@@ -453,35 +453,7 @@ namespace RegexToolbox.Tests
             _regexBuilder.AnyCharacterExcept("abc", RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: AnyCharacterExcept(""abc"", ZeroOrMore): [^abc]*", _logOutput);
         }
-        
-        [Test]
-        public void TestAnyOfNull()
-        {
-            _regexBuilder.AnyOf(null);
-            Assert.AreEqual(@"RegexBuilder: AnyOf(): strings collection is null, so doing nothing", _logOutput);
-        }
-        
-        [Test]
-        public void TestAnyOfNullWithQuantifier()
-        {
-            _regexBuilder.AnyOf(null, RegexQuantifier.ZeroOrMore);
-            Assert.AreEqual(@"RegexBuilder: AnyOf(): strings collection is null, so doing nothing", _logOutput);
-        }
-        
-        [Test]
-        public void TestAnyOfEmpty()
-        {
-            _regexBuilder.AnyOf(new List<string>());
-            Assert.AreEqual(@"RegexBuilder: AnyOf(): strings collection is empty, so doing nothing", _logOutput);
-        }
-        
-        [Test]
-        public void TestAnyOfEmptyWithQuantifier()
-        {
-            _regexBuilder.AnyOf(new List<string>(), RegexQuantifier.ZeroOrMore);
-            Assert.AreEqual(@"RegexBuilder: AnyOf(): strings collection is empty, so doing nothing", _logOutput);
-        }
-        
+
         [Test]
         public void TestAnyOfSingle()
         {
@@ -491,7 +463,7 @@ namespace RegexToolbox.Tests
             });
             Assert.AreEqual(@"RegexBuilder: AnyOf(""abc""): abc", _logOutput);
         }
-        
+
         [Test]
         public void TestAnyOfSingleWithQuantifier()
         {
@@ -501,14 +473,14 @@ namespace RegexToolbox.Tests
             }, RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: AnyOf(""abc"", ZeroOrMore): (?:abc)*", _logOutput);
         }
-        
+
         [Test]
         public void TestAnyOfParamsSingle()
         {
             _regexBuilder.AnyOf("abc");
             Assert.AreEqual(@"RegexBuilder: AnyOf(""abc""): abc", _logOutput);
         }
-        
+
         [Test]
         public void TestAnyOfMultiple()
         {
@@ -518,7 +490,7 @@ namespace RegexToolbox.Tests
             });
             Assert.AreEqual(@"RegexBuilder: AnyOf(""abc"", ""def""): (?:abc|def)", _logOutput);
         }
-        
+
         [Test]
         public void TestAnyOfMultipleWithQuantifier()
         {
@@ -528,35 +500,35 @@ namespace RegexToolbox.Tests
             }, RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: AnyOf(""abc"", ""def"", ZeroOrMore): (?:abc|def)*", _logOutput);
         }
-        
+
         [Test]
         public void TestAnyOfParamsMultiple()
         {
             _regexBuilder.AnyOf("abc", "def");
             Assert.AreEqual(@"RegexBuilder: AnyOf(""abc"", ""def""): (?:abc|def)", _logOutput);
         }
-        
+
         [Test]
         public void TestStartOfString()
         {
             _regexBuilder.StartOfString();
             Assert.AreEqual(@"RegexBuilder: StartOfString(): ^", _logOutput);
         }
-        
+
         [Test]
         public void TestEndOfString()
         {
             _regexBuilder.EndOfString();
             Assert.AreEqual(@"RegexBuilder: EndOfString(): $", _logOutput);
         }
-        
+
         [Test]
         public void TestWordBoundary()
         {
             _regexBuilder.WordBoundary();
             Assert.AreEqual(@"RegexBuilder: WordBoundary(): \b", _logOutput);
         }
-        
+
         [Test]
         public void TestStartGroup()
         {
@@ -584,91 +556,91 @@ namespace RegexToolbox.Tests
             _regexBuilder.StartGroup().EndGroup();
             Assert.AreEqual(@"RegexBuilder: EndGroup(): )", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierZeroOrMore()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.ZeroOrMore);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(ZeroOrMore): .*", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierZeroOrMoreButAsFewAsPossible()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.ZeroOrMore.ButAsFewAsPossible);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(ZeroOrMore.ButAsFewAsPossible): .*?", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierOneOrMore()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.OneOrMore);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(OneOrMore): .+", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierOneOrMoreButAsFewAsPossible()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.OneOrMore.ButAsFewAsPossible);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(OneOrMore.ButAsFewAsPossible): .+?", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierZeroOrOne()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.ZeroOrOne);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(ZeroOrOne): .?", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierZeroOrOneButAsFewAsPossible()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.ZeroOrOne.ButAsFewAsPossible);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(ZeroOrOne.ButAsFewAsPossible): .??", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierExactly()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.Exactly(10));
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(Exactly(10)): .{10}", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierAtLeast()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.AtLeast(10));
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(AtLeast(10)): .{10,}", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierAtLeastButAsFewAsPossible()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.AtLeast(10).ButAsFewAsPossible);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(AtLeast(10).ButAsFewAsPossible): .{10,}?", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierNoMoreThan()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.NoMoreThan(10));
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(NoMoreThan(10)): .{0,10}", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierNoMoreThanButAsFewAsPossible()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.NoMoreThan(10).ButAsFewAsPossible);
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(NoMoreThan(10).ButAsFewAsPossible): .{0,10}?", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierBetween()
         {
             _regexBuilder.AnyCharacter(RegexQuantifier.Between(10, 20));
             Assert.AreEqual(@"RegexBuilder: AnyCharacter(Between(10, 20)): .{10,20}", _logOutput);
         }
-        
+
         [Test]
         public void TestQuantifierBetweenButAsFewAsPossible()
         {

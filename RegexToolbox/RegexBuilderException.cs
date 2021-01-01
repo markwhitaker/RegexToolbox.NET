@@ -13,10 +13,10 @@ namespace RegexToolbox
         /// </summary>
         public string Regex { get; }
 
-        public RegexBuilderException(string message, StringBuilder stringBuilder)
+        public RegexBuilderException(string message, RegexBuilder regexBuilder)
             : base(message)
         {
-            Regex = stringBuilder.ToString();
+            Regex = regexBuilder.ToString();
         }
     }
 }

@@ -51,12 +51,12 @@ namespace RegexToolbox
         {
             if (_openGroupCount == 1)
             {
-                throw new RegexBuilderException("A group has been started but not ended", _stringBuilder);
+                throw new RegexBuilderException("A group has been started but not ended", this);
             }
 
             if (_openGroupCount > 1)
             {
-                throw new RegexBuilderException(_openGroupCount + " groups have been started but not ended", _stringBuilder);
+                throw new RegexBuilderException(_openGroupCount + " groups have been started but not ended", this);
             }
 
             var combinedOptions = System.Text.RegularExpressions.RegexOptions.None;
@@ -349,17 +349,10 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder AnyOf(IEnumerable<string> strings, RegexQuantifier quantifier = null)
         {
-            if (strings == null)
+            var stringsList = strings?.ToList();
+            if (stringsList == null || !stringsList.Any())
             {
-                Log("AnyOf()", "strings collection is null, so doing nothing");
-                return this;
-            }
-
-            var stringsList = strings.ToList();
-            if (!stringsList.Any())
-            {
-                Log("AnyOf()", "strings collection is empty, so doing nothing");
-                return this;
+                throw new RegexBuilderException("No parameters passed to AnyOf", this);
             }
 
             var joinedStrings = string.Join(", ", stringsList.Select(s => $"\"{s}\""));
@@ -378,6 +371,43 @@ namespace RegexToolbox
         {
             return AnyOf(strings, null);
         }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <example>
+        /// TODO
+        /// </example>
+        /// <param name="subRegexes"></param>
+        /// <returns></returns>
+        /// <exception cref="RegexBuilderException"></exception>
+        public RegexBuilder AnyOf(params Func<RegexBuilder, RegexBuilder>[] subRegexes)
+        {
+            if (subRegexes == null || !subRegexes.Any())
+            {
+                throw new RegexBuilderException("No parameters passed to AnyOf", this);
+            }
+
+            // TODO logging
+
+            if (subRegexes.Length == 1)
+            {
+                return subRegexes[0](this);
+            }
+
+            DoStartNonCapturingGroup();
+            for (var i = 0; i < subRegexes.Length; i++)
+            {
+                subRegexes[i](this);
+                if (i < subRegexes.Length - 1)
+                {
+                    _stringBuilder.Append("|");
+                }
+            }
+            return DoEndGroup();
+        }
+
+        // TODO: add AnyOf overrides
 
         #endregion
 
@@ -410,6 +440,11 @@ namespace RegexToolbox
         ///
         /// If you don't want to capture the group match, use <see cref="NonCapturingGroup"/>.
         /// </summary>
+        /// <example>
+        /// TODO
+        /// </example>
+        /// <param name="groupElements">TODO</param>
+        /// <param name="quantifier">TODO</param>
         public RegexBuilder Group(
             Func<RegexBuilder, RegexBuilder> groupElements,
             RegexQuantifier quantifier = null)
@@ -426,6 +461,11 @@ namespace RegexToolbox
         ///
         /// If you want to capture group results, use <see cref="Group"/> or <see cref="NamedGroup"/>.
         /// </summary>
+        /// <example>
+        /// TODO
+        /// </example>
+        /// <param name="groupElements">TODO</param>
+        /// <param name="quantifier">TODO</param>
         public RegexBuilder NonCapturingGroup(
             Func<RegexBuilder, RegexBuilder> groupElements,
             RegexQuantifier quantifier = null)
@@ -445,6 +485,12 @@ namespace RegexToolbox
         ///
         /// If you don't want to capture the group match, use <see cref="NonCapturingGroup"/>.
         /// </summary>
+        /// <example>
+        /// TODO
+        /// </example>
+        /// <param name="name">TODO</param>
+        /// <param name="groupElements">TODO</param>
+        /// <param name="quantifier">TODO</param>
         public RegexBuilder NamedGroup(
             string name,
             Func<RegexBuilder, RegexBuilder> groupElements,
@@ -499,6 +545,12 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this group</param>
         [Obsolete("Use Group, NamedGroup or NonCapturingGroup to create a group instead of the corresponding Start method")]
         public RegexBuilder EndGroup(RegexQuantifier quantifier = null) => DoEndGroup(quantifier);
+
+        #endregion
+
+        #region Object methods
+
+        public override string ToString() => _stringBuilder.ToString();
 
         #endregion
 
@@ -582,7 +634,7 @@ namespace RegexToolbox
         {
             if (_openGroupCount == 0)
             {
-                throw new RegexBuilderException("Cannot call endGroup() until a group has been started with startGroup()", _stringBuilder);
+                throw new RegexBuilderException("Cannot call endGroup() until a group has been started with startGroup()", this);
             }
 
             _openGroupCount--;

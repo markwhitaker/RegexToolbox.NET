@@ -4,6 +4,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexToolbox", "RegexToolbo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexToolbox.Tests", "RegexToolbox.Tests\RegexToolbox.Tests.csproj", "{32CF1BA4-33B2-483A-AE45-2AE59558132B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{DD3060A6-C709-44DD-AB87-23163397C1BA}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	LICENSE = LICENSE
+	README.md = README.md
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions workflows", "GitHub Actions workflows", "{357086F0-5048-4427-8E4A-5F623FF9BD84}"
+ProjectSection(SolutionItems) = preProject
+	.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
+	.github\workflows\publish-to-nuget.yml = .github\workflows\publish-to-nuget.yml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,5 +1,5 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using static RegexToolbox.RegexBuilder;
 using static RegexToolbox.RegexQuantifier;
 
 namespace RegexToolbox.Tests
@@ -1394,14 +1394,14 @@ namespace RegexToolbox.Tests
                 .AnyOf("cat")
                 .BuildRegex();
 
-            Assert.AreEqual("cat", anyOfSingleRegex.ToString());
+            Assert.AreEqual("(?:cat)", anyOfSingleRegex.ToString());
         }
 
         [Test]
         public void TestAnyOfRegexesNull()
         {
             var exception = Assert.Throws<RegexBuilderException>(() =>
-                new RegexBuilder().AnyOf((Func<RegexBuilder, RegexBuilder>[])null));
+                new RegexBuilder().AnyOf((SubRegexBuilder[])null));
             Assert.AreEqual(@"No parameters passed to AnyOf", exception.Message);
         }
 
@@ -1409,18 +1409,31 @@ namespace RegexToolbox.Tests
         public void TestAnyOfRegexesEmpty()
         {
             var exception = Assert.Throws<RegexBuilderException>(() =>
-                new RegexBuilder().AnyOf(new Func<RegexBuilder, RegexBuilder>[] { }));
+                new RegexBuilder().AnyOf(new SubRegexBuilder[] { }));
             Assert.AreEqual(@"No parameters passed to AnyOf", exception.Message);
         }
 
         [Test]
         public void TestAnyOfRegexesSingle()
         {
-            var regex = new RegexBuilder().AnyOf(r => r
-                .Text("cat"))
+            var regex = new RegexBuilder()
+                .AnyOf(r => r
+                    .Text("cat"))
                 .BuildRegex();
 
-            Assert.AreEqual(@"cat", regex.ToString());
+            Assert.AreEqual(@"(?:cat)", regex.ToString());
+        }
+
+        [Test]
+        public void TestAnyOfRegexesSingleWithQuantifier()
+        {
+            var regex = new RegexBuilder()
+                .AnyOf(new SubRegexBuilder[] { r => r
+                    .Text("cat")},
+                    OneOrMore)
+                .BuildRegex();
+
+            Assert.AreEqual(@"(?:cat)+", regex.ToString());
         }
 
         [Test]
@@ -1460,6 +1473,32 @@ namespace RegexToolbox.Tests
             Assert.IsFalse(regex.IsMatch("ends with 90"));
             Assert.IsFalse(regex.IsMatch("ends with <0>"));
             Assert.IsFalse(regex.IsMatch("ends with <890>"));
+        }
+
+        [Test]
+        public void TestAnyOfRegexesMultipleWithQuantifier()
+        {
+            var regex = new RegexBuilder()
+                .Text("<")
+                .AnyOf(new SubRegexBuilder[]
+                {
+                    r => r.Letter(Exactly(2)),
+                    r => r.Digit(Exactly(3))
+                }, Between(1, 2))
+                .Text(">")
+                .BuildRegex();
+
+            Assert.AreEqual(@"<(?:\p{L}{2}|\d{3}){1,2}>", regex.ToString());
+            Assert.IsTrue(regex.IsMatch("<ab>"));
+            Assert.IsTrue(regex.IsMatch("<abcd>"));
+            Assert.IsTrue(regex.IsMatch("<123>"));
+            Assert.IsTrue(regex.IsMatch("<123456>"));
+            Assert.IsFalse(regex.IsMatch("<a>"));
+            Assert.IsFalse(regex.IsMatch("<abc>"));
+            Assert.IsFalse(regex.IsMatch("<abcdef>"));
+            Assert.IsFalse(regex.IsMatch("<12>"));
+            Assert.IsFalse(regex.IsMatch("<12345>"));
+            Assert.IsFalse(regex.IsMatch("<123456789>"));
         }
 
         [Test]

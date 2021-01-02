@@ -13,10 +13,12 @@ namespace RegexToolbox
     /// <see cref="BuildRegex"/> to build the Regex.
     /// </summary>
     /// <example>
+    /// <code>
     /// Regex regex = new RegexBuilder()
     ///     .Text("cat")
     ///     .EndOfString()
     ///     .BuildRegex();
+    /// </code>
     /// </example>
     public sealed class RegexBuilder
     {
@@ -37,6 +39,12 @@ namespace RegexToolbox
         private readonly StringBuilder _stringBuilder = new StringBuilder();
 
         private int _openGroupCount;
+
+        /// <summary>
+        /// A delegate used to build a sub-part of a regex, for example in <see cref="RegexBuilder.Group"/>.
+        /// </summary>
+        /// <param name="regexBuilder">An in-progress <see cref="RegexBuilder"/> to pass into the delegate function</param>
+        public delegate RegexBuilder SubRegexBuilder(RegexBuilder regexBuilder);
 
         #region Build method
 
@@ -310,9 +318,9 @@ namespace RegexToolbox
                 throw new RegexBuilderException("No parameters passed to AnyOf", this);
             }
 
-            return stringsList.Count == 1 && quantifier == null
-                ? AddPart(MakeSafeForRegex(stringsList[0]))
-                : AddPartInNonCapturingGroup(string.Join("|", stringsList.Select(MakeSafeForRegex)), quantifier);
+            return AddPartInNonCapturingGroup(
+                string.Join("|", stringsList.Select(MakeSafeForRegex)),
+                quantifier);
         }
 
         /// <summary>
@@ -323,39 +331,67 @@ namespace RegexToolbox
         public RegexBuilder AnyOf(params string[] strings) => AnyOf(strings, null);
 
         /// <summary>
-        /// TODO
+        /// Add a group of alternatives, to match any of the sub-regexes provided. Each sub-regex can be an arbitrarily
+        /// complex regex in its own right.
         /// </summary>
         /// <example>
-        /// TODO
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .Text("(")
+        ///     .AnyOf(
+        ///         r => r.Digit(Exactly(3)),
+        ///         r => r.Letter(Exactly(4))
+        ///     )
+        ///     .Text(")")
+        ///     .BuildRegex();
+        /// </code>
         /// </example>
-        /// <param name="subRegexes"></param>
-        /// <returns></returns>
-        /// <exception cref="RegexBuilderException"></exception>
-        public RegexBuilder AnyOf(params Func<RegexBuilder, RegexBuilder>[] subRegexes)
+        /// <param name="subRegexBuilders">RegexBuilder chains that represent alternative sub-regexes to match</param>
+        /// <exception cref="RegexBuilderException">subRegexBuilders is null or empty</exception>
+        public RegexBuilder AnyOf(params SubRegexBuilder[] subRegexBuilders) =>
+            AnyOf(subRegexBuilders, null);
+
+        /// <summary>
+        /// Add a group of alternatives, to match any of the sub-regexes provided. Each sub-regex can be an arbitrarily
+        /// complex regex in its own right.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .Text("(")
+        ///     .AnyOf(new SubRegexBuilder[]
+        ///     {
+        ///         r => r.Digit(Exactly(3)),
+        ///         r => r.Letter(Exactly(4))
+        ///     }, RegexQuantifier.OneOrMore)
+        ///     .Text(")")
+        ///     .BuildRegex();
+        /// </code>
+        /// </example>
+        /// <param name="subRegexes">RegexBuilder chains that represent alternative sub-regexes to match</param>
+        /// <param name="quantifier">Quantifier to apply to this group of alternatives</param>
+        /// <exception cref="RegexBuilderException">subRegexBuilders is null or empty</exception>
+        public RegexBuilder AnyOf(
+            IEnumerable<SubRegexBuilder> subRegexes,
+            RegexQuantifier quantifier = null)
         {
-            if (subRegexes == null || !subRegexes.Any())
+            var subRegexesArray = subRegexes?.ToArray();
+            if (subRegexesArray == null || !subRegexesArray.Any())
             {
                 throw new RegexBuilderException("No parameters passed to AnyOf", this);
             }
 
-            if (subRegexes.Length == 1)
-            {
-                return subRegexes[0](this);
-            }
-
             DoStartNonCapturingGroup();
-            for (var i = 0; i < subRegexes.Length; i++)
+            for (var i = 0; i < subRegexesArray.Length; i++)
             {
-                subRegexes[i](this);
-                if (i < subRegexes.Length - 1)
+                subRegexesArray[i](this);
+                if (i < subRegexesArray.Length - 1)
                 {
                     _stringBuilder.Append("|");
                 }
             }
-            return DoEndGroup();
+            return DoEndGroup(quantifier);
         }
-
-        // TODO: add AnyOf overrides
 
         #endregion
 
@@ -389,12 +425,20 @@ namespace RegexToolbox
         /// If you don't want to capture the group match, use <see cref="NonCapturingGroup"/>.
         /// </summary>
         /// <example>
-        /// TODO
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .Group(r => r
+        ///         .Letter()
+        ///         .Digit())
+        ///     .BuildRegex();
+        /// </code>
         /// </example>
-        /// <param name="groupElements">TODO</param>
-        /// <param name="quantifier">TODO</param>
+        /// <param name="groupElements">
+        /// A lambda containing the <see cref="RegexBuilder"/> elements required within the group
+        /// </param>
+        /// <param name="quantifier">Quantifier to apply to this group</param>
         public RegexBuilder Group(
-            Func<RegexBuilder, RegexBuilder> groupElements,
+            SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
             DoStartGroup();
@@ -410,12 +454,20 @@ namespace RegexToolbox
         /// If you want to capture group results, use <see cref="Group"/> or <see cref="NamedGroup"/>.
         /// </summary>
         /// <example>
-        /// TODO
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .NonCapturingGroup(r => r
+        ///         .Letter()
+        ///         .Digit())
+        ///     .BuildRegex();
+        /// </code>
         /// </example>
-        /// <param name="groupElements">TODO</param>
-        /// <param name="quantifier">TODO</param>
+        /// <param name="groupElements">
+        /// A lambda containing the <see cref="RegexBuilder"/> elements required within the group
+        /// </param>
+        /// <param name="quantifier">Quantifier to apply to this group</param>
         public RegexBuilder NonCapturingGroup(
-            Func<RegexBuilder, RegexBuilder> groupElements,
+            SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
             DoStartNonCapturingGroup();
@@ -434,14 +486,22 @@ namespace RegexToolbox
         /// If you don't want to capture the group match, use <see cref="NonCapturingGroup"/>.
         /// </summary>
         /// <example>
-        /// TODO
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .NamedGroup("name", r => r
+        ///         .Letter()
+        ///         .Digit())
+        ///     .BuildRegex();
+        /// </code>
         /// </example>
-        /// <param name="name">TODO</param>
-        /// <param name="groupElements">TODO</param>
-        /// <param name="quantifier">TODO</param>
+        /// <param name="name">Name that can be used to access the group from <see cref="Match.Groups"/></param>
+        /// <param name="groupElements">
+        /// A lambda containing the <see cref="RegexBuilder"/> elements required within the group
+        /// </param>
+        /// <param name="quantifier">Quantifier to apply to this group</param>
         public RegexBuilder NamedGroup(
             string name,
-            Func<RegexBuilder, RegexBuilder> groupElements,
+            SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
             DoStartNamedGroup(name);

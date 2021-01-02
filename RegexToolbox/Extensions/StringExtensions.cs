@@ -64,5 +64,32 @@ namespace RegexToolbox.Extensions
             }
             return regex.RemoveLast(input);
         }
+
+        /// <summary>
+        /// Replace all matches of the supplied <see cref="Regex"/> in this string with a replacement string
+        /// </summary>
+        /// <param name="input">String to process</param>
+        /// <param name="regex">Regex to match</param>
+        /// <param name="replacement">Replacement text</param>
+        /// <returns>A copy of this string with all matches of the regex replaced</returns>
+        public static string Replace(this string input, Regex regex, string replacement)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
+            if (regex == null)
+            {
+                throw new ArgumentNullException(nameof(regex));
+            }
+
+            if (replacement == null)
+            {
+                throw new ArgumentNullException(nameof(replacement));
+            }
+
+            return regex.Replace(input, replacement);
+        }
     }
 }

@@ -23,6 +23,7 @@ namespace RegexToolbox
         /// <summary>
         /// Interface to a logger attached by the client code which will receive log messages as the regex is built.
         /// </summary>
+        [Obsolete("Logging is no longer generated and will be removed in a future release")]
         public interface ILogger
         {
             /// <summary>
@@ -34,8 +35,6 @@ namespace RegexToolbox
 
         private const string DefaultLogTag = "RegexBuilder";
         private readonly StringBuilder _stringBuilder = new StringBuilder();
-        private Action<string> _logFunction;
-        private string _prefix;
 
         private int _openGroupCount;
 
@@ -51,12 +50,12 @@ namespace RegexToolbox
         {
             if (_openGroupCount == 1)
             {
-                throw new RegexBuilderException("A group has been started but not ended", _stringBuilder);
+                throw new RegexBuilderException("A group has been started but not ended", this);
             }
 
             if (_openGroupCount > 1)
             {
-                throw new RegexBuilderException(_openGroupCount + " groups have been started but not ended", _stringBuilder);
+                throw new RegexBuilderException(_openGroupCount + " groups have been started but not ended", this);
             }
 
             var combinedOptions = System.Text.RegularExpressions.RegexOptions.None;
@@ -74,7 +73,6 @@ namespace RegexToolbox
             }
 
             var stringBuilt = _stringBuilder.ToString();
-            Log("BuildRegex()", stringBuilt);
             var regex = new Regex(stringBuilt, combinedOptions);
             _stringBuilder.Clear();
             return regex;
@@ -90,10 +88,8 @@ namespace RegexToolbox
         /// </summary>
         /// <param name="logger">Logger to receive log messages from the builder</param>
         /// <param name="prefix">A prefix to add at the start of each log message. Defaults to "RegexBuilder".</param>
-        public RegexBuilder AddLogger(ILogger logger, string prefix = DefaultLogTag)
-        {
-            return AddLogger(logger.Log, prefix);
-        }
+        [Obsolete("Logging is no longer generated and will be removed in a future release")]
+        public RegexBuilder AddLogger(ILogger logger, string prefix = DefaultLogTag) => this;
 
         /// <summary>
         /// Attach a logger to this builder using a lambda expression. The builder will emit logging
@@ -101,12 +97,8 @@ namespace RegexToolbox
         /// </summary>
         /// <param name="logFunction">Lambda to invoke with log messages from the builder</param>
         /// <param name="prefix">A prefix to add at the start of each log message. Defaults to "RegexBuilder".</param>
-        public RegexBuilder AddLogger(Action<string> logFunction, string prefix = DefaultLogTag)
-        {
-            _logFunction = logFunction;
-            _prefix = prefix;
-            return this;
-        }
+        [Obsolete("Logging is no longer generated and will be removed in a future release")]
+        public RegexBuilder AddLogger(Action<string> logFunction, string prefix = DefaultLogTag) => this;
 
         #endregion
 
@@ -126,12 +118,11 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder Text(string text, RegexQuantifier quantifier = null)
         {
-            var method = quantifier == null ? $"Text(\"{text}\")" : $"Text(\"{text}\", {quantifier.Name})";
             var safeText = MakeSafeForRegex(text);
             // If we have a quantifier, apply it to the whole string by putting it in a non-capturing group
-            return (quantifier == null)
-                ? AddPart(method, safeText)
-                : AddPartInNonCapturingGroup(method, safeText, quantifier);
+            return quantifier == null
+                ? AddPart(safeText)
+                : AddPartInNonCapturingGroup(safeText, quantifier);
         }
 
         /// <summary>
@@ -149,198 +140,161 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to the whole string</param>
         public RegexBuilder RegexText(string text, RegexQuantifier quantifier = null)
         {
-            var method = quantifier == null ? $"RegexText(\"{text}\")" : $"RegexText(\"{text}\", {quantifier.Name})";
             // If we have a quantifier, apply it to the whole string by putting it in a non-capturing group
-            return (quantifier == null)
-                ? AddPart(method, text)
-                : AddPartInNonCapturingGroup(method, text, quantifier);
+            return quantifier == null
+                ? AddPart(text)
+                : AddPartInNonCapturingGroup(text, quantifier);
         }
 
         /// <summary>
         /// Add an element to match any character.
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder AnyCharacter(RegexQuantifier quantifier = null) =>
-            AddPart($"AnyCharacter({quantifier?.Name})", ".", quantifier);
+        public RegexBuilder AnyCharacter(RegexQuantifier quantifier = null) => AddPart(".", quantifier);
 
         /// <summary>
         /// Add an element to match any single whitespace character.
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder Whitespace(RegexQuantifier quantifier = null) =>
-            AddPart($"Whitespace({quantifier?.Name})", @"\s", quantifier);
+        public RegexBuilder Whitespace(RegexQuantifier quantifier = null) => AddPart(@"\s", quantifier);
 
         /// <summary>
         /// Add an element to match any single non-whitespace character.
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder NonWhitespace(RegexQuantifier quantifier = null) =>
-            AddPart($"NonWhitespace({quantifier?.Name})", @"\S", quantifier);
+        public RegexBuilder NonWhitespace(RegexQuantifier quantifier = null) => AddPart(@"\S", quantifier);
 
         /// <summary>
         /// Add an element to represent any amount of white space, including none. This is just a convenient alias for
         /// <code>Whitespace(RegexQuantifier.ZeroOrMore)</code>.
         /// </summary>
         /// <returns></returns>
-        public RegexBuilder PossibleWhitespace() =>
-            AddPart("PossibleWhitespace()", @"\s", RegexQuantifier.ZeroOrMore);
+        public RegexBuilder PossibleWhitespace() => AddPart(@"\s", RegexQuantifier.ZeroOrMore);
 
         /// <summary>
         /// Add an element to match a single space character. If you want to match any kind of white space, use
         /// <see cref="Whitespace"/>.
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder Space(RegexQuantifier quantifier = null) =>
-            AddPart($"Space({quantifier?.Name})", " ", quantifier);
+        public RegexBuilder Space(RegexQuantifier quantifier = null) => AddPart(" ", quantifier);
 
         /// <summary>
         /// Add an element to match a single tab character.
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder Tab(RegexQuantifier quantifier = null) =>
-            AddPart($"Tab({quantifier?.Name})", @"\t", quantifier);
+        public RegexBuilder Tab(RegexQuantifier quantifier = null) => AddPart(@"\t", quantifier);
 
         /// <summary>
         /// Add an element to match a single line feed character.
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder LineFeed(RegexQuantifier quantifier = null) =>
-            AddPart($"LineFeed({quantifier?.Name})", @"\n", quantifier);
+        public RegexBuilder LineFeed(RegexQuantifier quantifier = null) => AddPart(@"\n", quantifier);
 
         /// <summary>
         /// Add an element to match a single carriage return character.
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder CarriageReturn(RegexQuantifier quantifier = null) =>
-            AddPart($"CarriageReturn({quantifier?.Name})", @"\r", quantifier);
+        public RegexBuilder CarriageReturn(RegexQuantifier quantifier = null) => AddPart(@"\r", quantifier);
 
         /// <summary>
         /// Add an element to match any single decimal digit (0-9).
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder Digit(RegexQuantifier quantifier = null) =>
-            AddPart($"Digit({quantifier?.Name})", @"\d", quantifier);
+        public RegexBuilder Digit(RegexQuantifier quantifier = null) => AddPart(@"\d", quantifier);
 
         /// <summary>
         /// Add an element to match any character that is not a decimal digit (0-9).
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder NonDigit(RegexQuantifier quantifier = null) =>
-            AddPart($"NonDigit({quantifier?.Name})", @"\D", quantifier);
+        public RegexBuilder NonDigit(RegexQuantifier quantifier = null) => AddPart(@"\D", quantifier);
 
         /// <summary>
         /// Add an element to match any Unicode letter
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder Letter(RegexQuantifier quantifier = null) =>
-            AddPart($"Letter({quantifier?.Name})", @"\p{L}", quantifier);
+        public RegexBuilder Letter(RegexQuantifier quantifier = null) => AddPart(@"\p{L}", quantifier);
 
         /// <summary>
         /// Add an element to match any character that is not a Unicode letter
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder NonLetter(RegexQuantifier quantifier = null) =>
-            AddPart($"NonLetter({quantifier?.Name})", @"\P{L}", quantifier);
+        public RegexBuilder NonLetter(RegexQuantifier quantifier = null) => AddPart(@"\P{L}", quantifier);
 
         /// <summary>
         /// Add an element to match any upper-case Unicode letter
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder UppercaseLetter(RegexQuantifier quantifier = null) =>
-            AddPart($"UppercaseLetter({quantifier?.Name})", @"\p{Lu}", quantifier);
+        public RegexBuilder UppercaseLetter(RegexQuantifier quantifier = null) => AddPart(@"\p{Lu}", quantifier);
 
         /// <summary>
         /// Add an element to match any lowercase Unicode letter
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder LowercaseLetter(RegexQuantifier quantifier = null) =>
-            AddPart($"LowercaseLetter({quantifier?.Name})", @"\p{Ll}", quantifier);
+        public RegexBuilder LowercaseLetter(RegexQuantifier quantifier = null) => AddPart(@"\p{Ll}", quantifier);
 
         /// <summary>
         /// Add an element to match any Unicode letter or decimal digit
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder LetterOrDigit(RegexQuantifier quantifier = null) =>
-            AddPart($"LetterOrDigit({quantifier?.Name})", @"[\p{L}0-9]", quantifier);
+        public RegexBuilder LetterOrDigit(RegexQuantifier quantifier = null) => AddPart(@"[\p{L}0-9]", quantifier);
 
         /// <summary>
         /// Add an element to match any character that is not a Unicode letter or a decimal digit
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder NonLetterOrDigit(RegexQuantifier quantifier = null) =>
-            AddPart($"NonLetterOrDigit({quantifier?.Name})", @"[^\p{L}0-9]", quantifier);
+        public RegexBuilder NonLetterOrDigit(RegexQuantifier quantifier = null) => AddPart(@"[^\p{L}0-9]", quantifier);
 
         /// <summary>
         /// Add an element to match any hexadecimal digit (a-f, A-F, 0-9)
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder HexDigit(RegexQuantifier quantifier = null) =>
-            AddPart($"HexDigit({quantifier?.Name})", "[0-9A-Fa-f]", quantifier);
+        public RegexBuilder HexDigit(RegexQuantifier quantifier = null) => AddPart("[0-9A-Fa-f]", quantifier);
 
         /// <summary>
         /// Add an element to match any uppercase hexadecimal digit (A-F, 0-9)
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder UppercaseHexDigit(RegexQuantifier quantifier = null) =>
-            AddPart($"UppercaseHexDigit({quantifier?.Name})", "[0-9A-F]", quantifier);
+        public RegexBuilder UppercaseHexDigit(RegexQuantifier quantifier = null) => AddPart("[0-9A-F]", quantifier);
 
         /// <summary>
         /// Add an element to match any lowercase hexadecimal digit (a-f, 0-9)
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder LowercaseHexDigit(RegexQuantifier quantifier = null) =>
-            AddPart($"LowercaseHexDigit({quantifier?.Name})", "[0-9a-f]", quantifier);
+        public RegexBuilder LowercaseHexDigit(RegexQuantifier quantifier = null) => AddPart("[0-9a-f]", quantifier);
 
         /// <summary>
         /// Add an element to match any character that is not a hexadecimal digit (a-f, A-F, 0-9)
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder NonHexDigit(RegexQuantifier quantifier = null) =>
-            AddPart($"NonHexDigit({quantifier?.Name})", "[^0-9A-Fa-f]", quantifier);
+        public RegexBuilder NonHexDigit(RegexQuantifier quantifier = null) => AddPart("[^0-9A-Fa-f]", quantifier);
 
         /// <summary>
         /// Add an element to match any Unicode letter, decimal digit, or underscore
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder WordCharacter(RegexQuantifier quantifier = null) =>
-            AddPart($"WordCharacter({quantifier?.Name})", @"[\p{L}0-9_]", quantifier);
+        public RegexBuilder WordCharacter(RegexQuantifier quantifier = null) => AddPart(@"[\p{L}0-9_]", quantifier);
 
         /// <summary>
         /// Add an element to match any character that is not a Unicode letter, decimal digit, or underscore
         /// </summary>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder NonWordCharacter(RegexQuantifier quantifier = null) =>
-            AddPart($"NonWordCharacter({quantifier?.Name})", @"[^\p{L}0-9_]", quantifier);
+        public RegexBuilder NonWordCharacter(RegexQuantifier quantifier = null) => AddPart(@"[^\p{L}0-9_]", quantifier);
 
         /// <summary>
         /// Add an element (a character class) to match any of the characters provided.
         /// </summary>
         /// <param name="characters">String containing all characters to include in the character class</param>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder AnyCharacterFrom(string characters, RegexQuantifier quantifier = null)
-        {
-            var method = quantifier == null
-                ? $"AnyCharacterFrom(\"{characters}\")"
-                : $"AnyCharacterFrom(\"{characters}\", {quantifier.Name})";
-
-            // Build a character class, remembering to escape any ] character if passed in
-            return AddPart(method, "[" + MakeSafeForCharacterClass(characters) + "]", quantifier);
-        }
+        public RegexBuilder AnyCharacterFrom(string characters, RegexQuantifier quantifier = null) =>
+            AddPart("[" + MakeSafeForCharacterClass(characters) + "]", quantifier);
 
         /// <summary>
         /// Add an element (a character class) to match any character except those provided.
         /// </summary>
         /// <param name="characters">String containing all characters to exclude from the character class</param>
         /// <param name="quantifier">Quantifier to apply to this element</param>
-        public RegexBuilder AnyCharacterExcept(string characters, RegexQuantifier quantifier = null)
-        {
-            var method = quantifier == null
-                ? $"AnyCharacterExcept(\"{characters}\")"
-                : $"AnyCharacterExcept(\"{characters}\", {quantifier.Name})";
-
-            // Build a character class, remembering to escape any ] character if passed in
-            return AddPart(method, "[^" + MakeSafeForCharacterClass(characters) + "]", quantifier);
-        }
+        public RegexBuilder AnyCharacterExcept(string characters, RegexQuantifier quantifier = null) =>
+            AddPart("[^" + MakeSafeForCharacterClass(characters) + "]", quantifier);
 
         /// <summary>
         /// Add a group of alternatives, to match any of the strings provided
@@ -349,24 +303,15 @@ namespace RegexToolbox
         /// <param name="quantifier">Quantifier to apply to this element</param>
         public RegexBuilder AnyOf(IEnumerable<string> strings, RegexQuantifier quantifier = null)
         {
-            if (strings == null)
+            var stringsList = strings?.ToList();
+            if (stringsList == null || !stringsList.Any())
             {
-                Log("AnyOf()", "strings collection is null, so doing nothing");
-                return this;
+                throw new RegexBuilderException("No parameters passed to AnyOf", this);
             }
 
-            var stringsList = strings.ToList();
-            if (!stringsList.Any())
-            {
-                Log("AnyOf()", "strings collection is empty, so doing nothing");
-                return this;
-            }
-
-            var joinedStrings = string.Join(", ", stringsList.Select(s => $"\"{s}\""));
-            var method = quantifier == null ? $"AnyOf({joinedStrings})" : $"AnyOf({joinedStrings}, {quantifier.Name})";
-            return (stringsList.Count == 1 && quantifier == null)
-                ? AddPart(method, MakeSafeForRegex(stringsList[0]))
-                : AddPartInNonCapturingGroup(method, string.Join("|", stringsList.Select(MakeSafeForRegex)), quantifier);
+            return AddPartInNonCapturingGroup(
+                string.Join("|", stringsList.Select(MakeSafeForRegex)),
+                quantifier);
         }
 
         /// <summary>
@@ -374,10 +319,7 @@ namespace RegexToolbox
         /// use the overloaded method.
         /// </summary>
         /// <param name="strings">A number of strings, any one of which will be matched</param>
-        public RegexBuilder AnyOf(params string[] strings)
-        {
-            return AnyOf(strings, null);
-        }
+        public RegexBuilder AnyOf(params string[] strings) => AnyOf(strings, null);
 
         #endregion
 
@@ -386,18 +328,18 @@ namespace RegexToolbox
         /// <summary>
         /// Add a zero-width anchor element to match the start of the string
         /// </summary>
-        public RegexBuilder StartOfString() => AddPart("StartOfString()", "^");
+        public RegexBuilder StartOfString() => AddPart("^");
 
         /// <summary>
         /// Add a zero-width anchor element to match the end of the string
         /// </summary>
-        public RegexBuilder EndOfString() => AddPart("EndOfString()", "$");
+        public RegexBuilder EndOfString() => AddPart("$");
 
         /// <summary>
         /// Add a zero-width anchor element to match the boundary between an alphanumeric/underscore character
         /// and either a non-alphanumeric, non-underscore character or the start/end of the string.
         /// </summary>
-        public RegexBuilder WordBoundary() => AddPart("WordBoundary()", @"\b");
+        public RegexBuilder WordBoundary() => AddPart(@"\b");
 
         #endregion
 
@@ -502,24 +444,24 @@ namespace RegexToolbox
 
         #endregion
 
+        #region Object methods
+
+        public override string ToString() => _stringBuilder.ToString();
+
+        #endregion
+
         #region Private methods
 
-        private RegexBuilder AddPart(string method, string part, RegexQuantifier quantifier = null)
+        private RegexBuilder AddPart(string part, RegexQuantifier quantifier = null)
         {
-            Log(method, $"{part}{quantifier}");
             _stringBuilder
                 .Append(part)
                 .Append(quantifier);
             return this;
         }
 
-        private void Log(string method, string message)
-        {
-            _logFunction?.Invoke($"{_prefix}: {method}: {message}");
-        }
-
-        private RegexBuilder AddPartInNonCapturingGroup(string methodName, string part, RegexQuantifier quantifier = null) =>
-            AddPart(methodName, $"(?:{part})", quantifier);
+        private RegexBuilder AddPartInNonCapturingGroup(string part, RegexQuantifier quantifier = null) =>
+            AddPart($"(?:{part})", quantifier);
 
         private static string MakeSafeForCharacterClass(string s)
         {
@@ -563,30 +505,30 @@ namespace RegexToolbox
         private RegexBuilder DoStartGroup()
         {
             _openGroupCount++;
-            return AddPart("StartGroup()", "(");
+            return AddPart("(");
         }
 
         private RegexBuilder DoStartNonCapturingGroup()
         {
             _openGroupCount++;
-            return AddPart("StartNonCapturingGroup()", "(?:");
+            return AddPart("(?:");
         }
 
         private RegexBuilder DoStartNamedGroup(string name)
         {
             _openGroupCount++;
-            return AddPart($"StartNamedGroup(\"{name}\")", $"(?<{name}>");
+            return AddPart($"(?<{name}>");
         }
 
         private RegexBuilder DoEndGroup(RegexQuantifier quantifier = null)
         {
             if (_openGroupCount == 0)
             {
-                throw new RegexBuilderException("Cannot call endGroup() until a group has been started with startGroup()", _stringBuilder);
+                throw new RegexBuilderException("Cannot call endGroup() until a group has been started with startGroup()", this);
             }
 
             _openGroupCount--;
-            return AddPart($"EndGroup({quantifier?.Name})", ")", quantifier);
+            return AddPart(")", quantifier);
         }
 
         #endregion

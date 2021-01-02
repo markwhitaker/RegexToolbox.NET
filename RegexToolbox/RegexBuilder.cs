@@ -13,10 +13,12 @@ namespace RegexToolbox
     /// <see cref="BuildRegex"/> to build the Regex.
     /// </summary>
     /// <example>
+    /// <code>
     /// Regex regex = new RegexBuilder()
     ///     .Text("cat")
     ///     .EndOfString()
     ///     .BuildRegex();
+    /// </code>
     /// </example>
     public sealed class RegexBuilder
     {
@@ -37,6 +39,12 @@ namespace RegexToolbox
         private readonly StringBuilder _stringBuilder = new StringBuilder();
 
         private int _openGroupCount;
+
+        /// <summary>
+        /// A delegate used to build a sub-part of a regex, for example in <see cref="RegexBuilder.Group"/>.
+        /// </summary>
+        /// <param name="regexBuilder">An in-progress <see cref="RegexBuilder"/> to pass into the delegate function</param>
+        public delegate RegexBuilder SubRegexBuilder(RegexBuilder regexBuilder);
 
         #region Build method
 
@@ -119,6 +127,7 @@ namespace RegexToolbox
         public RegexBuilder Text(string text, RegexQuantifier quantifier = null)
         {
             var safeText = MakeSafeForRegex(text);
+
             // If we have a quantifier, apply it to the whole string by putting it in a non-capturing group
             return quantifier == null
                 ? AddPart(safeText)
@@ -321,6 +330,69 @@ namespace RegexToolbox
         /// <param name="strings">A number of strings, any one of which will be matched</param>
         public RegexBuilder AnyOf(params string[] strings) => AnyOf(strings, null);
 
+        /// <summary>
+        /// Add a group of alternatives, to match any of the sub-regexes provided. Each sub-regex can be an arbitrarily
+        /// complex regex in its own right.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .Text("(")
+        ///     .AnyOf(
+        ///         r => r.Digit(Exactly(3)),
+        ///         r => r.Letter(Exactly(4))
+        ///     )
+        ///     .Text(")")
+        ///     .BuildRegex();
+        /// </code>
+        /// </example>
+        /// <param name="subRegexBuilders">RegexBuilder chains that represent alternative sub-regexes to match</param>
+        /// <exception cref="RegexBuilderException">subRegexBuilders is null or empty</exception>
+        public RegexBuilder AnyOf(params SubRegexBuilder[] subRegexBuilders) =>
+            AnyOf(subRegexBuilders, null);
+
+        /// <summary>
+        /// Add a group of alternatives, to match any of the sub-regexes provided. Each sub-regex can be an arbitrarily
+        /// complex regex in its own right.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .Text("(")
+        ///     .AnyOf(new SubRegexBuilder[]
+        ///     {
+        ///         r => r.Digit(Exactly(3)),
+        ///         r => r.Letter(Exactly(4))
+        ///     }, RegexQuantifier.OneOrMore)
+        ///     .Text(")")
+        ///     .BuildRegex();
+        /// </code>
+        /// </example>
+        /// <param name="subRegexes">RegexBuilder chains that represent alternative sub-regexes to match</param>
+        /// <param name="quantifier">Quantifier to apply to this group of alternatives</param>
+        /// <exception cref="RegexBuilderException">subRegexBuilders is null or empty</exception>
+        public RegexBuilder AnyOf(
+            IEnumerable<SubRegexBuilder> subRegexes,
+            RegexQuantifier quantifier = null)
+        {
+            var subRegexesArray = subRegexes?.ToArray();
+            if (subRegexesArray == null || !subRegexesArray.Any())
+            {
+                throw new RegexBuilderException("No parameters passed to AnyOf", this);
+            }
+
+            DoStartNonCapturingGroup();
+            for (var i = 0; i < subRegexesArray.Length; i++)
+            {
+                subRegexesArray[i](this);
+                if (i < subRegexesArray.Length - 1)
+                {
+                    _stringBuilder.Append("|");
+                }
+            }
+            return DoEndGroup(quantifier);
+        }
+
         #endregion
 
         #region Anchors (zero-width assertions)
@@ -352,8 +424,21 @@ namespace RegexToolbox
         ///
         /// If you don't want to capture the group match, use <see cref="NonCapturingGroup"/>.
         /// </summary>
+        /// <example>
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .Group(r => r
+        ///         .Letter()
+        ///         .Digit())
+        ///     .BuildRegex();
+        /// </code>
+        /// </example>
+        /// <param name="groupElements">
+        /// A lambda containing the <see cref="RegexBuilder"/> elements required within the group
+        /// </param>
+        /// <param name="quantifier">Quantifier to apply to this group</param>
         public RegexBuilder Group(
-            Func<RegexBuilder, RegexBuilder> groupElements,
+            SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
             DoStartGroup();
@@ -368,8 +453,21 @@ namespace RegexToolbox
         ///
         /// If you want to capture group results, use <see cref="Group"/> or <see cref="NamedGroup"/>.
         /// </summary>
+        /// <example>
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .NonCapturingGroup(r => r
+        ///         .Letter()
+        ///         .Digit())
+        ///     .BuildRegex();
+        /// </code>
+        /// </example>
+        /// <param name="groupElements">
+        /// A lambda containing the <see cref="RegexBuilder"/> elements required within the group
+        /// </param>
+        /// <param name="quantifier">Quantifier to apply to this group</param>
         public RegexBuilder NonCapturingGroup(
-            Func<RegexBuilder, RegexBuilder> groupElements,
+            SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
             DoStartNonCapturingGroup();
@@ -387,9 +485,23 @@ namespace RegexToolbox
         ///
         /// If you don't want to capture the group match, use <see cref="NonCapturingGroup"/>.
         /// </summary>
+        /// <example>
+        /// <code>
+        /// Regex regex = new RegexBuilder()
+        ///     .NamedGroup("name", r => r
+        ///         .Letter()
+        ///         .Digit())
+        ///     .BuildRegex();
+        /// </code>
+        /// </example>
+        /// <param name="name">Name that can be used to access the group from <see cref="Match.Groups"/></param>
+        /// <param name="groupElements">
+        /// A lambda containing the <see cref="RegexBuilder"/> elements required within the group
+        /// </param>
+        /// <param name="quantifier">Quantifier to apply to this group</param>
         public RegexBuilder NamedGroup(
             string name,
-            Func<RegexBuilder, RegexBuilder> groupElements,
+            SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
             DoStartNamedGroup(name);

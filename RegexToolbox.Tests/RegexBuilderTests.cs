@@ -1371,23 +1371,29 @@ namespace RegexToolbox.Tests
         }
 
         [Test]
-        public void TestAnyOfNullEmptyOrSingle()
+        public void TestAnyOfNull()
         {
-            var anyOfNullRegex = new RegexBuilder()
-                .AnyOf(null)
-                .BuildRegex();
+            var exception = Assert.Throws<RegexBuilderException>(() =>
+                new RegexBuilder().AnyOf((string[])null));
+            Assert.AreEqual(@"No parameters passed to AnyOf", exception.Message);
+        }
 
-            var anyOfEmptyRegex = new RegexBuilder()
-                .AnyOf(new string[] { })
-                .BuildRegex();
+        [Test]
+        public void TestAnyOfEmpty()
+        {
+            var exception = Assert.Throws<RegexBuilderException>(() =>
+                new RegexBuilder().AnyOf(new string[] { }));
+            Assert.AreEqual(@"No parameters passed to AnyOf", exception.Message);
+        }
 
+        [Test]
+        public void TestAnyOfSingle()
+        {
             var anyOfSingleRegex = new RegexBuilder()
-                .AnyOf(new []{"cat"})
+                .AnyOf("cat")
                 .BuildRegex();
 
-            Assert.AreEqual(string.Empty, anyOfNullRegex.ToString());
-            Assert.AreEqual(string.Empty, anyOfEmptyRegex.ToString());
-            Assert.AreEqual("cat", anyOfSingleRegex.ToString());
+            Assert.AreEqual("(?:cat)", anyOfSingleRegex.ToString());
         }
 
         [Test]

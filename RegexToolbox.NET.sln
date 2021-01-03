@@ -9,12 +9,7 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	LICENSE = LICENSE
 	README.md = README.md
-EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions workflows", "GitHub Actions workflows", "{357086F0-5048-4427-8E4A-5F623FF9BD84}"
-ProjectSection(SolutionItems) = preProject
-	.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
-	.github\workflows\publish-to-nuget.yml = .github\workflows\publish-to-nuget.yml
+	.circleci\config.yml = .circleci\config.yml
 EndProjectSection
 EndProject
 Global

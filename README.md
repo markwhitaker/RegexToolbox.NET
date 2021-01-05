@@ -25,29 +25,72 @@ var regex = new RegexBuilder()
 
 But that's just a taste of what `RegexBuilder` does: for full API documentation, head over to the [project wiki](https://github.com/markwhitaker/RegexToolbox.NET/wiki).
 
-## New in 1.3: Logging
+## New in 1.6
 
-Use the new `AddLogger()` method to connect a logger of your choice and see how your regex is built, step by step. For example:
+### Improved grouping methods
+
+Version 1.6 introduces a simplified syntax for cleaner, less error-prone creating of groups. Go from this:
 
 ```c#
 var regex = new RegexBuilder()
-    .AddLogger(Console.WriteLine)
-    .WordBoundary()
-    .Text("Regex")
-    .AnyOf("Builder", "Toolbox")
-    .WordBoundary()
+    .StartGroup()
+    .Letter()
+    .Digit()
+    .BuildRegex(); // ERROR: forgot to call EndGroup()
+```
+
+to this:
+
+```c#
+var regex = new RegexBuilder()
+    .Group(r => r
+        .Letter()
+        .Digit()
+    ) // Yay! Can't forget to end the group
     .BuildRegex();
 ```
 
-will output this to your console:
+There are also new `NamedGroup()` and `NonCapturingGroup()` methods.
 
-```text
-RegexBuilder: WordBoundary(): \b
-RegexBuilder: Text("Regex"): Regex
-RegexBuilder: AnyOf("Builder", "Toolbox"): (?:Builder|Toolbox)
-RegexBuilder: WordBoundary(): \b
-RegexBuilder: BuildRegex(): \bRegex(?:Builder|Toolbox)\b
+**The old methods `StartGroup()`, `StartNamedGroup()`, `StartNonCapturingGroup()` and `EndGroup()` have been deprecated and will be removed in version 2.0.**
+
+### More powerful `AnyOf()` overloads
+
+The `AnyOf()` method is used to match any of a set of alternatives.
+Previously it only let you specify strings as the alternatives, for example:
+
+```c#
+var animalLoverRegex = new RegexBuilder()
+    .Text("I love ")
+    .AnyOf("cats", "dogs", "tortoises")
+    .BuildRegex();
 ```
+
+Now you can specify arbitrarily complex sub-regexes as the alternatives, such as:
+
+```c#
+// Match 3 letters followed by a full stop OR 4 digits followed by a comma
+// (for some weird reason)
+var regex = new RegexBuilder()
+    .AnyOf(
+        r => r
+            .Letter(Exactly(3))
+            .Text("."),
+        r => r
+            .Digit(Exactly(4))
+            .Text(",")
+    )
+    .BuildRegex();
+```
+
+### New `string` extension method
+
+`string.Replace(Regex regex, string replacement)`
+
+### Logging deprecated (removed in version 2.0)
+
+The logging feature introduced in version 1.3 wasn't adding as useful as I'd imagined and had introduced various maintenance difficulties.
+In this release the APIs are deprecated and do nothing. **Logging will be removed altogether in version 2.0.**
 
 ---
 ![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.Java/master/artwork/RegexToolbox-icon-32.png) **Java developer?** Check out the Java version of this library, [RegexToolbox.Java](https://github.com/markwhitaker/RegexToolbox.Java).

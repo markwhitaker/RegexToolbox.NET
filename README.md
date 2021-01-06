@@ -25,6 +25,17 @@ var regex = new RegexBuilder()
 
 But that's just a taste of what `RegexBuilder` does: for full API documentation, head over to the [project wiki](https://github.com/markwhitaker/RegexToolbox.NET/wiki).
 
+## Breaking changes in 2.0
+
+All `RegexBuilder` features that were deprecated in version 1.6 have been removed in 2.0.
+
+|Removed|Replaced with|
+|---|---|
+|`StartGroup()`...`EndGroup()`|`Group()`|
+|`StartNamedGroup()`...`EndGroup()`|`NamedGroup()`|
+|`StartNonCapturingGroup()`...`EndGroup()`|`NonCapturingGroup()`|
+|`AddLogger()`|No replacement: logging has been removed.|
+
 ## New in 1.6
 
 ### Improved grouping methods

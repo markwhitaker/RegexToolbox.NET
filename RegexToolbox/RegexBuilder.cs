@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,23 +21,7 @@ namespace RegexToolbox
     /// </example>
     public sealed class RegexBuilder
     {
-        /// <summary>
-        /// Interface to a logger attached by the client code which will receive log messages as the regex is built.
-        /// </summary>
-        [Obsolete("Logging is no longer generated and will be removed in a future release")]
-        public interface ILogger
-        {
-            /// <summary>
-            /// Log a message to a real logger (Trace, Console, a third-party logging framework, or whatever you want).
-            /// </summary>
-            /// <param name="message">Message to log</param>
-            void Log(string message);
-        }
-
-        private const string DefaultLogTag = "RegexBuilder";
         private readonly StringBuilder _stringBuilder = new StringBuilder();
-
-        private int _openGroupCount;
 
         /// <summary>
         /// A delegate used to build a sub-part of a regex, for example in <see cref="RegexBuilder.Group"/>.
@@ -56,16 +39,6 @@ namespace RegexToolbox
         /// <returns>Regex as built</returns>
         public Regex BuildRegex(params RegexOptions[] options)
         {
-            if (_openGroupCount == 1)
-            {
-                throw new RegexBuilderException("A group has been started but not ended", this);
-            }
-
-            if (_openGroupCount > 1)
-            {
-                throw new RegexBuilderException(_openGroupCount + " groups have been started but not ended", this);
-            }
-
             var combinedOptions = System.Text.RegularExpressions.RegexOptions.None;
             foreach (var option in options)
             {
@@ -85,28 +58,6 @@ namespace RegexToolbox
             _stringBuilder.Clear();
             return regex;
         }
-
-        #endregion
-
-        #region Logging
-
-        /// <summary>
-        /// Attach a logger to this builder using this <see cref="ILogger"/> interface. The builder will emit logging
-        /// messages to it as the regex is built.
-        /// </summary>
-        /// <param name="logger">Logger to receive log messages from the builder</param>
-        /// <param name="prefix">A prefix to add at the start of each log message. Defaults to "RegexBuilder".</param>
-        [Obsolete("Logging is no longer generated and will be removed in a future release")]
-        public RegexBuilder AddLogger(ILogger logger, string prefix = DefaultLogTag) => this;
-
-        /// <summary>
-        /// Attach a logger to this builder using a lambda expression. The builder will emit logging
-        /// messages to it as the regex is built.
-        /// </summary>
-        /// <param name="logFunction">Lambda to invoke with log messages from the builder</param>
-        /// <param name="prefix">A prefix to add at the start of each log message. Defaults to "RegexBuilder".</param>
-        [Obsolete("Logging is no longer generated and will be removed in a future release")]
-        public RegexBuilder AddLogger(Action<string> logFunction, string prefix = DefaultLogTag) => this;
 
         #endregion
 
@@ -381,7 +332,7 @@ namespace RegexToolbox
                 throw new RegexBuilderException("No parameters passed to AnyOf", this);
             }
 
-            DoStartNonCapturingGroup();
+            StartNonCapturingGroup();
             for (var i = 0; i < subRegexesArray.Length; i++)
             {
                 subRegexesArray[i](this);
@@ -390,7 +341,7 @@ namespace RegexToolbox
                     _stringBuilder.Append("|");
                 }
             }
-            return DoEndGroup(quantifier);
+            return EndGroup(quantifier);
         }
 
         #endregion
@@ -441,9 +392,9 @@ namespace RegexToolbox
             SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
-            DoStartGroup();
+            AddPart("(");
             groupElements(this);
-            return DoEndGroup(quantifier);
+            return EndGroup(quantifier);
         }
 
         /// <summary>
@@ -470,9 +421,9 @@ namespace RegexToolbox
             SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
-            DoStartNonCapturingGroup();
+            StartNonCapturingGroup();
             groupElements(this);
-            return DoEndGroup(quantifier);
+            return EndGroup(quantifier);
         }
 
         /// <summary>
@@ -504,55 +455,10 @@ namespace RegexToolbox
             SubRegexBuilder groupElements,
             RegexQuantifier quantifier = null)
         {
-            DoStartNamedGroup(name);
+            AddPart($"(?<{name}>");
             groupElements(this);
-            return DoEndGroup(quantifier);
+            return EndGroup(quantifier);
         }
-
-        /// <summary>
-        /// Start a capture group. Capture groups have two purposes: they group part of the expression so
-        /// it can have quantifiers applied to it, and they capture the results of each group match and
-        /// allow you to access them afterwards using Match.Groups.
-        ///
-        /// If you don't want to capture the group match, use <see cref="StartNonCapturingGroup"/>.
-        ///
-        /// Note: all groups must be ended with <see cref="EndGroup"/> before calling <see cref="BuildRegex"/>.
-        /// </summary>
-        [Obsolete("Use Group instead")]
-        public RegexBuilder StartGroup() => DoStartGroup();
-
-        /// <summary>
-        /// Start a non-capturing group. Non-capturing groups group part of the expression so
-        /// it can have quantifiers applied to it, but do not capture the results of each group match, meaning
-        /// you can't access them afterwards using Match.Groups.
-        ///
-        /// If you want to capture group results, use <see cref="StartGroup"/> or <see cref="StartNamedGroup"/>.
-        ///
-        /// Note: all groups must be ended with <see cref="EndGroup"/> before calling <see cref="BuildRegex"/>.
-        /// </summary>
-        [Obsolete("Use NonCapturingGroup instead")]
-        public RegexBuilder StartNonCapturingGroup() => DoStartNonCapturingGroup();
-
-        /// <summary>
-        /// Start a named capture group. Capture groups have two purposes: they group part of the expression so
-        /// it can have quantifiers applied to it, and they capture the results of each group match and
-        /// allow you to access them afterwards using Match.Groups. Named capture groups can be accessed by
-        /// indexing into Match.Groups with the assigned name as well as a numerical index.
-        ///
-        /// If you don't want to capture the group match, use <see cref="StartNonCapturingGroup"/>.
-        ///
-        /// Note: all groups must be ended with <see cref="EndGroup"/> before calling <see cref="BuildRegex"/>.
-        /// </summary>
-        [Obsolete("Use NamedGroup instead")]
-        public RegexBuilder StartNamedGroup(string name) => DoStartNamedGroup(name);
-
-        /// <summary>
-        /// End the innermost group previously started with <see cref="StartGroup"/>, <see cref="StartNonCapturingGroup"/> or
-        /// <see cref="StartNamedGroup"/>.
-        /// </summary>
-        /// <param name="quantifier">Quantifier to apply to this group</param>
-        [Obsolete("Use Group, NamedGroup or NonCapturingGroup to create a group instead of the corresponding Start method")]
-        public RegexBuilder EndGroup(RegexQuantifier quantifier = null) => DoEndGroup(quantifier);
 
         #endregion
 
@@ -614,34 +520,9 @@ namespace RegexToolbox
             return result;
         }
 
-        private RegexBuilder DoStartGroup()
-        {
-            _openGroupCount++;
-            return AddPart("(");
-        }
+        private void StartNonCapturingGroup() => AddPart("(?:");
 
-        private RegexBuilder DoStartNonCapturingGroup()
-        {
-            _openGroupCount++;
-            return AddPart("(?:");
-        }
-
-        private RegexBuilder DoStartNamedGroup(string name)
-        {
-            _openGroupCount++;
-            return AddPart($"(?<{name}>");
-        }
-
-        private RegexBuilder DoEndGroup(RegexQuantifier quantifier = null)
-        {
-            if (_openGroupCount == 0)
-            {
-                throw new RegexBuilderException("Cannot call endGroup() until a group has been started with startGroup()", this);
-            }
-
-            _openGroupCount--;
-            return AddPart(")", quantifier);
-        }
+        private RegexBuilder EndGroup(RegexQuantifier quantifier = null) => AddPart(")", quantifier);
 
         #endregion
     }

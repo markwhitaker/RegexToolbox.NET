@@ -1639,15 +1639,6 @@ namespace RegexToolbox.Tests
                     .Digit())
                 .BuildRegex();
 
-            var oldSyntaxRegex = new RegexBuilder()
-                .AnyCharacter(ZeroOrMore)
-                .StartGroup()
-                    .Letter()
-                    .Digit()
-                .EndGroup()
-                .BuildRegex();
-
-            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@".*(\p{L}\d)", regex.ToString());
 
             var match = regex.Match("Class A1");
@@ -1700,14 +1691,6 @@ namespace RegexToolbox.Tests
                     .Digit())
                 .BuildRegex();
 
-            var oldSyntaxRegex = new RegexBuilder()
-                .StartGroup()
-                    .Letter()
-                    .Digit()
-                .EndGroup()
-                .BuildRegex();
-
-            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@"(\p{L}\d)", regex.ToString());
 
             var matches = regex.Matches("Class A1 f2 ZZ88");
@@ -1749,15 +1732,6 @@ namespace RegexToolbox.Tests
                 .LowercaseLetter(OneOrMore)
                 .BuildRegex();
 
-            var oldSyntaxRegex = new RegexBuilder()
-                .LowercaseLetter(OneOrMore)
-                .StartNamedGroup("test123")
-                    .Digit(OneOrMore)
-                .EndGroup()
-                .LowercaseLetter(OneOrMore)
-                .BuildRegex();
-
-            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@"\p{Ll}+(?<test123>\d+)\p{Ll}+", regex.ToString());
 
             var match = regex.Match("a99z");
@@ -1799,15 +1773,6 @@ namespace RegexToolbox.Tests
                 .LowercaseLetter(OneOrMore)
                 .BuildRegex();
 
-            var oldSyntaxRegex = new RegexBuilder()
-                .LowercaseLetter(OneOrMore)
-                .StartNonCapturingGroup()
-                    .Digit(OneOrMore)
-                .EndGroup()
-                .LowercaseLetter(OneOrMore)
-                .BuildRegex();
-
-            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@"\p{Ll}+(?:\d+)\p{Ll}+", regex.ToString());
 
             var match = regex.Match("a99z");
@@ -1852,17 +1817,6 @@ namespace RegexToolbox.Tests
                     .Digit())
                 .BuildRegex();
 
-            var oldSyntaxRegex = new RegexBuilder()
-                .StartGroup()
-                    .AnyCharacter(ZeroOrMore)
-                .EndGroup()
-                .StartGroup()
-                    .Letter()
-                    .Digit()
-                .EndGroup()
-                .BuildRegex();
-
-            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@"(.*)(\p{L}\d)", regex.ToString());
 
             var match = regex.Match("Class A1");
@@ -1923,18 +1877,6 @@ namespace RegexToolbox.Tests
                 )
                 .BuildRegex();
 
-            var oldSyntaxRegex = new RegexBuilder()
-                .AnyCharacter() // Omit first character from groups
-                .StartGroup()
-                    .AnyCharacter(ZeroOrMore)
-                    .StartGroup()
-                        .Letter()
-                        .Digit()
-                    .EndGroup()
-                .EndGroup()
-                .BuildRegex();
-
-            Assert.AreEqual(oldSyntaxRegex.ToString(), regex.ToString());
             Assert.AreEqual(@".(.*(\p{L}\d))", regex.ToString());
 
             var match = regex.Match("Class A1");
@@ -2517,65 +2459,6 @@ namespace RegexToolbox.Tests
             Assert.IsTrue(regex.IsMatch(Strings.Ipv4Address));
             Assert.IsFalse(regex.IsMatch(Strings.Ipv6Address));
             Assert.IsFalse(regex.IsMatch(Strings.MacAddress));
-        }
-
-        [Test]
-        public void TestExceptionGroupMismatch1()
-        {
-            RegexBuilderException exception = null;
-
-            try
-            {
-                new RegexBuilder()
-                    .EndGroup()
-                    .BuildRegex();
-            }
-            catch (RegexBuilderException e)
-            {
-                exception = e;
-            }
-            Assert.IsNotNull(exception);
-            Assert.AreEqual(string.Empty, exception.Regex);
-        }
-
-        [Test]
-        public void TestExceptionGroupMismatch2()
-        {
-            RegexBuilderException exception = null;
-
-            try
-            {
-                new RegexBuilder()
-                    .StartGroup()
-                    .BuildRegex();
-            }
-            catch (RegexBuilderException e)
-            {
-                exception = e;
-            }
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("(", exception.Regex);
-        }
-
-        [Test]
-        public void TestExceptionGroupMismatch3()
-        {
-            RegexBuilderException exception = null;
-
-            try
-            {
-                new RegexBuilder()
-                    .StartGroup()
-                    .StartGroup()
-                    .EndGroup()
-                    .BuildRegex();
-            }
-            catch (RegexBuilderException e)
-            {
-                exception = e;
-            }
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("(()", exception.Regex);
         }
 
         [Test]

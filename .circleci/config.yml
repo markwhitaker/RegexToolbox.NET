@@ -25,19 +25,22 @@ jobs:
 
   deploy-nuget-package:
     <<: *setup-environment
-    environment:
-      # Strip any pre-release suffix from CIRCLE_TAG to make a clean assembly version
-      ASSEMBLY_VERSION: "$(echo $CIRCLE_TAG | sed -e 's/-.*//')"
+#    environment:
+#      # Strip any pre-release suffix from CIRCLE_TAG to make a clean assembly version
+#      ASSEMBLY_VERSION: "$(echo "$CIRCLE_TAG" | sed -e 's/-.*//')"
     steps:
       - checkout
-      - run:
-          name: Show environment variables
-          command: |
-            echo CIRCLE_TAG=$CIRCLE_TAG
-            echo ASSEMBLY_VERSION=$ASSEMBLY_VERSION
+#      - run:
+#          name: Show environment variables
+#          command: |
+#            echo CIRCLE_TAG=$CIRCLE_TAG
+#            echo ASSEMBLY_VERSION=$ASSEMBLY_VERSION
       - run:
           name: Build library (with version)
-          command:
+          command: |
+            ASSEMBLY_VERSION=$(echo $CIRCLE_TAG | sed -e 's/-.*//')
+            echo CIRCLE_TAG=$CIRCLE_TAG
+            echo ASSEMBLY_VERSION=$ASSEMBLY_VERSION
             dotnet build -c Release /p:Version=$CIRCLE_TAG /p:AssemblyVersion=$ASSEMBLY_VERSION
       - run:
           name: Build NuGet package

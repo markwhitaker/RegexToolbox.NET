@@ -1,6 +1,6 @@
 ![icon](Artwork/RegexToolbox-icon-100.png)
 
-# RegexToolbox.NET [![GitHub Actions build](https://github.com/markwhitaker/RegexToolbox.NET/workflows/Build%20and%20test/badge.svg)](https://github.com/markwhitaker/RegexToolbox.NET/actions) [![NuGet Version and Downloads count](https://buildstats.info/nuget/RegexToolbox)](https://www.nuget.org/packages/RegexToolbox/)
+# RegexToolbox.NET [![CircleCI](https://circleci.com/gh/markwhitaker/RegexToolbox.NET.svg?style=shield)](https://circleci.com/gh/markwhitaker/RegexToolbox.NET) [![NuGet Version and Downloads count](https://buildstats.info/nuget/RegexToolbox)](https://www.nuget.org/packages/RegexToolbox/)
 
 Regular expression tools for .NET developers.
 
@@ -100,7 +100,7 @@ var regex = new RegexBuilder()
 
 ### Logging deprecated (removed in version 2.0)
 
-The logging feature introduced in version 1.3 wasn't adding as useful as I'd imagined and had introduced various maintenance difficulties.
+The logging feature introduced in version 1.3 wasn't proving as useful as I'd imagined and had introduced various maintenance difficulties.
 In this release the APIs are deprecated and do nothing. **Logging will be removed altogether in version 2.0.**
 
 ---

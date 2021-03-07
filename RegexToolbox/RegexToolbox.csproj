@@ -26,4 +26,16 @@
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="RegexBuilder.CharacterClasses.cs">
+        <DependentUpon>RegexBuilder.cs</DependentUpon>
+      </Compile>
+      <Compile Update="RegexBuilder.Grouping.cs">
+        <DependentUpon>RegexBuilder.cs</DependentUpon>
+      </Compile>
+      <Compile Update="RegexBuilder.Anchors.cs">
+        <DependentUpon>RegexBuilder.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>

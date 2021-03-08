@@ -106,9 +106,5 @@ namespace RegexToolbox
 
             return result;
         }
-
-        private void StartNonCapturingGroup() => AddPart("(?:");
-
-        private RegexBuilder EndGroup(RegexQuantifier quantifier = null) => AddPart(")", quantifier);
     }
 }

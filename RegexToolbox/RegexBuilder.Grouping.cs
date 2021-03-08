@@ -95,5 +95,9 @@ namespace RegexToolbox
             groupElements(this);
             return EndGroup(quantifier);
         }
+
+        private RegexBuilder StartNonCapturingGroup() => AddPart("(?:");
+
+        private RegexBuilder EndGroup(RegexQuantifier quantifier = null) => AddPart(")", quantifier);
     }
 }

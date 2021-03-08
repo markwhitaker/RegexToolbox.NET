@@ -66,7 +66,9 @@ namespace RegexToolbox
         }
 
         private RegexBuilder AddPartInNonCapturingGroup(string part, RegexQuantifier quantifier = null) =>
-            AddPart($"(?:{part})", quantifier);
+            StartNonCapturingGroup()
+                .AddPart(part)
+                .EndGroup(quantifier);
 
         private static string MakeSafeForCharacterClass(string s)
         {
@@ -106,9 +108,5 @@ namespace RegexToolbox
 
             return result;
         }
-
-        private void StartNonCapturingGroup() => AddPart("(?:");
-
-        private RegexBuilder EndGroup(RegexQuantifier quantifier = null) => AddPart(")", quantifier);
     }
 }

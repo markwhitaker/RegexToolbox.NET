@@ -95,8 +95,8 @@ namespace RegexToolbox
         private static string MakeSafeForRegex(string s)
         {
             return RegexUnsafeCharacters
-                .Aggregate(s, (current, c) =>
-                    current.Replace(c, $@"\{c}"));
+                .Aggregate(s, (safe, notSafe) =>
+                    safe.Replace(notSafe, $@"\{notSafe}"));
         }
     }
 }

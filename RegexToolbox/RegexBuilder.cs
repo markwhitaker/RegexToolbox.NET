@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -26,6 +27,13 @@ namespace RegexToolbox
             @"\", "?", ".", "+", "*", "^", "$", "(", ")", "[", "]", "{", "}", "|"
         };
 
+        private static readonly IReadOnlyDictionary<RegexOptions, System.Text.RegularExpressions.RegexOptions>
+            RegexOptionsMap = new Dictionary<RegexOptions, System.Text.RegularExpressions.RegexOptions>
+            {
+                { RegexOptions.IgnoreCase, System.Text.RegularExpressions.RegexOptions.IgnoreCase },
+                { RegexOptions.Multiline, System.Text.RegularExpressions.RegexOptions.Multiline }
+            };
+
         private readonly StringBuilder _stringBuilder = new StringBuilder();
 
         /// <summary>
@@ -42,19 +50,9 @@ namespace RegexToolbox
         /// <returns>Regex as built</returns>
         public Regex BuildRegex(params RegexOptions[] options)
         {
-            var combinedOptions = System.Text.RegularExpressions.RegexOptions.None;
-            foreach (var option in options)
-            {
-                switch (option)
-                {
-                    case RegexOptions.IgnoreCase:
-                        combinedOptions |= System.Text.RegularExpressions.RegexOptions.IgnoreCase;
-                        break;
-                    case RegexOptions.Multiline:
-                        combinedOptions |= System.Text.RegularExpressions.RegexOptions.Multiline;
-                        break;
-                }
-            }
+            var combinedOptions = options.Aggregate(
+                System.Text.RegularExpressions.RegexOptions.None,
+                (current, option) => current | RegexOptionsMap[option]);
 
             var stringBuilt = _stringBuilder.ToString();
             var regex = new Regex(stringBuilt, combinedOptions);

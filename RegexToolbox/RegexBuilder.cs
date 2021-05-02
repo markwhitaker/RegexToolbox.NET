@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace RegexToolbox
@@ -19,6 +20,12 @@ namespace RegexToolbox
     /// </example>
     public sealed partial class RegexBuilder
     {
+        private static readonly string[] RegexUnsafeCharacters =
+        {
+            // These are escaped in the order declared here, so make sure \ always comes first
+            @"\", "?", ".", "+", "*", "^", "$", "(", ")", "[", "]", "{", "}", "|"
+        };
+
         private readonly StringBuilder _stringBuilder = new StringBuilder();
 
         /// <summary>
@@ -81,7 +88,7 @@ namespace RegexToolbox
             // replace ^ with \^ if it occurs at the start of the string
             if (result.StartsWith("^"))
             {
-                result = @"\" + result;
+                result = $@"\{result}";
             }
 
             return result;
@@ -89,24 +96,9 @@ namespace RegexToolbox
 
         private static string MakeSafeForRegex(string s)
         {
-            var result = s
-                // Make sure this always comes first!
-                .Replace(@"\", @"\\")
-                .Replace("?", @"\?")
-                .Replace(".", @"\.")
-                .Replace("+", @"\+")
-                .Replace("*", @"\*")
-                .Replace("^", @"\^")
-                .Replace("$", @"\$")
-                .Replace("(", @"\(")
-                .Replace(")", @"\)")
-                .Replace("[", @"\[")
-                .Replace("]", @"\]")
-                .Replace("{", @"\{")
-                .Replace("}", @"\}")
-                .Replace("|", @"\|");
-
-            return result;
+            return RegexUnsafeCharacters
+                .Aggregate(s, (current, c) =>
+                    current.Replace(c, $@"\{c}"));
         }
     }
 }

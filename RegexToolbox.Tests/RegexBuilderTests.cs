@@ -59,5 +59,15 @@ namespace RegexToolbox.Tests
 
             Assert.That(s, Is.EqualTo(@"test\*"));
         }
+
+        [Test]
+        public void TestEscapeCharacters()
+        {
+            var regex = new RegexBuilder()
+                .Text(@"\?.+*^$()[]{}|")
+                .BuildRegex();
+
+            Assert.That(regex.ToString(), Is.EqualTo(@"\\\?\.\+\*\^\$\(\)\[\]\{\}\|"));
+        }
     }
 }

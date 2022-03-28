@@ -3,298 +3,297 @@ using System.Text.RegularExpressions;
 using NUnit.Framework;
 using RegexToolbox.Extensions;
 
-namespace RegexToolbox.Tests.Extensions
+namespace RegexToolbox.Tests.Extensions;
+
+[TestFixture]
+public class StringExtensionsTests
 {
-    [TestFixture]
-    public class StringExtensionsTests
+    [Test]
+    public void GivenInputStringContainingOneRegexMatch_WhenRemove_ThenMatchIsRemovedFromString()
     {
-        [Test]
-        public void GivenInputStringContainingOneRegexMatch_WhenRemove_ThenMatchIsRemovedFromString()
-        {
-            // Given
-            const string input = "Hello there friendly world";
-            var regex = new RegexBuilder()
-                .Whitespace()
-                .Text("there")
-                .BuildRegex();
+        // Given
+        const string input = "Hello there friendly world";
+        var regex = new RegexBuilder()
+            .Whitespace()
+            .Text("there")
+            .BuildRegex();
 
-            // When
-            var actualResult = input.Remove(regex);
+        // When
+        var actualResult = input.Remove(regex);
 
-            // Then
-            Assert.That(actualResult, Is.EqualTo("Hello friendly world"));
-        }
+        // Then
+        Assert.That(actualResult, Is.EqualTo("Hello friendly world"));
+    }
 
-        [Test]
-        public void GivenInputStringContainingMultipleRegexMatches_WhenRemove_ThenAllMatchesAreRemovedFromString()
-        {
-            // Given
-            const string input = "Hello there friendly world";
-            var regex = new RegexBuilder()
-                .Whitespace()
-                .Letter(RegexQuantifier.OneOrMore)
-                .BuildRegex();
+    [Test]
+    public void GivenInputStringContainingMultipleRegexMatches_WhenRemove_ThenAllMatchesAreRemovedFromString()
+    {
+        // Given
+        const string input = "Hello there friendly world";
+        var regex = new RegexBuilder()
+            .Whitespace()
+            .Letter(RegexQuantifier.OneOrMore)
+            .BuildRegex();
 
-            // When
-            var actualResult = input.Remove(regex);
+        // When
+        var actualResult = input.Remove(regex);
 
-            // Then
-            Assert.That(actualResult, Is.EqualTo("Hello"));
-        }
+        // Then
+        Assert.That(actualResult, Is.EqualTo("Hello"));
+    }
 
-        [Test]
-        public void GivenInputStringContainingMultipleRegexMatches_WhenRemoveFirst_ThenFirstMatchIsRemovedFromString()
-        {
-            // Given
-            const string input = "Hello there friendly world";
-            var regex = new RegexBuilder()
-                .Whitespace()
-                .Letter(RegexQuantifier.OneOrMore)
-                .BuildRegex();
+    [Test]
+    public void GivenInputStringContainingMultipleRegexMatches_WhenRemoveFirst_ThenFirstMatchIsRemovedFromString()
+    {
+        // Given
+        const string input = "Hello there friendly world";
+        var regex = new RegexBuilder()
+            .Whitespace()
+            .Letter(RegexQuantifier.OneOrMore)
+            .BuildRegex();
 
-            // When
-            var actualResult = input.RemoveFirst(regex);
+        // When
+        var actualResult = input.RemoveFirst(regex);
 
-            // Then
-            Assert.That(actualResult, Is.EqualTo("Hello friendly world"));
-        }
+        // Then
+        Assert.That(actualResult, Is.EqualTo("Hello friendly world"));
+    }
 
-        [Test]
-        public void GivenInputStringContainingMultipleRegexMatches_WhenRemoveLast_ThenLastMatchIsRemovedFromString()
-        {
-            // Given
-            const string input = "Hello there friendly world";
-            var regex = new RegexBuilder()
-                .Whitespace()
-                .Letter(RegexQuantifier.OneOrMore)
-                .BuildRegex();
+    [Test]
+    public void GivenInputStringContainingMultipleRegexMatches_WhenRemoveLast_ThenLastMatchIsRemovedFromString()
+    {
+        // Given
+        const string input = "Hello there friendly world";
+        var regex = new RegexBuilder()
+            .Whitespace()
+            .Letter(RegexQuantifier.OneOrMore)
+            .BuildRegex();
 
-            // When
-            var actualResult = input.RemoveLast(regex);
+        // When
+        var actualResult = input.RemoveLast(regex);
 
-            // Then
-            Assert.That(actualResult, Is.EqualTo("Hello there friendly"));
-        }
+        // Then
+        Assert.That(actualResult, Is.EqualTo("Hello there friendly"));
+    }
 
-        [TestCase("Hello world")]
-        [TestCase("")]
-        public void GivenInputStringContainingNoRegexMatches_WhenRemove_ThenStringIsUnaltered(string input)
-        {
-            // Given
-            var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.OneOrMore)
-                .BuildRegex();
+    [TestCase("Hello world")]
+    [TestCase("")]
+    public void GivenInputStringContainingNoRegexMatches_WhenRemove_ThenStringIsUnaltered(string input)
+    {
+        // Given
+        var regex = new RegexBuilder()
+            .Digit(RegexQuantifier.OneOrMore)
+            .BuildRegex();
 
-            // When
-            var actualResult = input.Remove(regex);
+        // When
+        var actualResult = input.Remove(regex);
 
-            // Then
-            Assert.That(actualResult, Is.SameAs(input));
-        }
+        // Then
+        Assert.That(actualResult, Is.SameAs(input));
+    }
 
-        [TestCase("Hello world")]
-        [TestCase("")]
-        public void GivenInputStringContainingNoRegexMatches_WhenRemoveFirst_ThenStringIsUnaltered(string input)
-        {
-            // Given
-            var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.OneOrMore)
-                .BuildRegex();
+    [TestCase("Hello world")]
+    [TestCase("")]
+    public void GivenInputStringContainingNoRegexMatches_WhenRemoveFirst_ThenStringIsUnaltered(string input)
+    {
+        // Given
+        var regex = new RegexBuilder()
+            .Digit(RegexQuantifier.OneOrMore)
+            .BuildRegex();
 
-            // When
-            var actualResult = input.RemoveFirst(regex);
+        // When
+        var actualResult = input.RemoveFirst(regex);
 
-            // Then
-            Assert.That(actualResult, Is.SameAs(input));
-        }
+        // Then
+        Assert.That(actualResult, Is.SameAs(input));
+    }
 
-        [TestCase("Hello world")]
-        [TestCase("")]
-        public void GivenInputStringContainingNoRegexMatches_WhenRemoveLast_ThenStringIsUnaltered(string input)
-        {
-            // Given
-            var regex = new RegexBuilder()
-                .Digit(RegexQuantifier.OneOrMore)
-                .BuildRegex();
+    [TestCase("Hello world")]
+    [TestCase("")]
+    public void GivenInputStringContainingNoRegexMatches_WhenRemoveLast_ThenStringIsUnaltered(string input)
+    {
+        // Given
+        var regex = new RegexBuilder()
+            .Digit(RegexQuantifier.OneOrMore)
+            .BuildRegex();
 
-            // When
-            var actualResult = input.RemoveLast(regex);
+        // When
+        var actualResult = input.RemoveLast(regex);
 
-            // Then
-            Assert.That(actualResult, Is.SameAs(input));
-        }
+        // Then
+        Assert.That(actualResult, Is.SameAs(input));
+    }
 
-        [Test]
-        public void GivenNullInputString_WhenRemove_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = null;
-            var regex = new RegexBuilder()
-                .Digit()
-                .BuildRegex();
+    [Test]
+    public void GivenNullInputString_WhenRemove_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = null;
+        var regex = new RegexBuilder()
+            .Digit()
+            .BuildRegex();
 
-            // When/Then
-            var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
+        // When/Then
+        var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("input"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("input"));
+    }
 
-        [Test]
-        public void GivenNullInputString_WhenRemoveFirst_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = null;
-            var regex = new RegexBuilder()
-                .Digit()
-                .BuildRegex();
+    [Test]
+    public void GivenNullInputString_WhenRemoveFirst_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = null;
+        var regex = new RegexBuilder()
+            .Digit()
+            .BuildRegex();
 
-            // When/Then
-            var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
+        // When/Then
+        var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("input"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("input"));
+    }
 
-        [Test]
-        public void GivenNullInputString_WhenRemoveLast_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = null;
-            var regex = new RegexBuilder()
-                .Digit()
-                .BuildRegex();
+    [Test]
+    public void GivenNullInputString_WhenRemoveLast_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = null;
+        var regex = new RegexBuilder()
+            .Digit()
+            .BuildRegex();
 
-            // When/Then
-            var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
+        // When/Then
+        var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("input"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("input"));
+    }
 
-        [Test]
-        public void GivenNullRegex_WhenRemove_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = "Hello world";
-            Regex regex = null;
+    [Test]
+    public void GivenNullRegex_WhenRemove_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = "Hello world";
+        Regex regex = null;
 
-            // When/Then
-            // ReSharper disable once ExpressionIsAlwaysNull
-            var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
+        // When/Then
+        // ReSharper disable once ExpressionIsAlwaysNull
+        var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("regex"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("regex"));
+    }
 
-        [Test]
-        public void GivenNullRegex_WhenRemoveFirst_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = "Hello world";
-            Regex regex = null;
+    [Test]
+    public void GivenNullRegex_WhenRemoveFirst_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = "Hello world";
+        Regex regex = null;
 
-            // When/Then
-            // ReSharper disable once ExpressionIsAlwaysNull
-            var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
+        // When/Then
+        // ReSharper disable once ExpressionIsAlwaysNull
+        var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("regex"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("regex"));
+    }
 
-        [Test]
-        public void GivenNullRegex_WhenRemoveLast_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = "Hello world";
-            Regex regex = null;
+    [Test]
+    public void GivenNullRegex_WhenRemoveLast_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = "Hello world";
+        Regex regex = null;
 
-            // When/Then
-            // ReSharper disable once ExpressionIsAlwaysNull
-            var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
+        // When/Then
+        // ReSharper disable once ExpressionIsAlwaysNull
+        var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("regex"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("regex"));
+    }
 
-        [Test]
-        public void GivenInputStringContainingMultipleRegexMatches_WhenReplace_ThenAllMatchesAreReplacedInString()
-        {
-            // Given
-            const string input = "Hello there friendly world";
-            var regex = new RegexBuilder()
-                .Letter(RegexQuantifier.OneOrMore)
-                .BuildRegex();
+    [Test]
+    public void GivenInputStringContainingMultipleRegexMatches_WhenReplace_ThenAllMatchesAreReplacedInString()
+    {
+        // Given
+        const string input = "Hello there friendly world";
+        var regex = new RegexBuilder()
+            .Letter(RegexQuantifier.OneOrMore)
+            .BuildRegex();
 
-            // When
-            var actualResult = input.Replace(regex, "x");
+        // When
+        var actualResult = input.Replace(regex, "x");
 
-            // Then
-            Assert.That(actualResult, Is.EqualTo("x x x x"));
-        }
+        // Then
+        Assert.That(actualResult, Is.EqualTo("x x x x"));
+    }
 
-        [Test]
-        public void GivenInputStringContainingNoRegexMatches_WhenReplace_ThenStringIsUnaltered()
-        {
-            // Given
-            const string input = "Hello there friendly world";
-            var regex = new RegexBuilder()
-                .Digit()
-                .BuildRegex();
+    [Test]
+    public void GivenInputStringContainingNoRegexMatches_WhenReplace_ThenStringIsUnaltered()
+    {
+        // Given
+        const string input = "Hello there friendly world";
+        var regex = new RegexBuilder()
+            .Digit()
+            .BuildRegex();
 
-            // When
-            var actualResult = input.Replace(regex, "x");
+        // When
+        var actualResult = input.Replace(regex, "x");
 
-            // Then
-            Assert.That(actualResult, Is.EqualTo("Hello there friendly world"));
-        }
+        // Then
+        Assert.That(actualResult, Is.EqualTo("Hello there friendly world"));
+    }
 
-        [Test]
-        public void GivenNullInputString_WhenReplace_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = null;
-            var regex = new RegexBuilder()
-                .Digit()
-                .BuildRegex();
+    [Test]
+    public void GivenNullInputString_WhenReplace_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = null;
+        var regex = new RegexBuilder()
+            .Digit()
+            .BuildRegex();
 
-            // When/Then
-            var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, "x"));
+        // When/Then
+        var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, "x"));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("input"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("input"));
+    }
 
-        [Test]
-        public void GivenNullRegex_WhenReplace_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = "Hello world";
-            Regex regex = null;
+    [Test]
+    public void GivenNullRegex_WhenReplace_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = "Hello world";
+        Regex regex = null;
 
-            // When/Then
-            // ReSharper disable once ExpressionIsAlwaysNull
-            var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, "x"));
+        // When/Then
+        // ReSharper disable once ExpressionIsAlwaysNull
+        var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, "x"));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("regex"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("regex"));
+    }
 
-        [Test]
-        public void GivenNullReplacement_WhenReplace_ThenArgumentNullExceptionIsThrown()
-        {
-            // Given
-            const string input = "Hello world";
-            var regex = new RegexBuilder()
-                .Digit()
-                .BuildRegex();
+    [Test]
+    public void GivenNullReplacement_WhenReplace_ThenArgumentNullExceptionIsThrown()
+    {
+        // Given
+        const string input = "Hello world";
+        var regex = new RegexBuilder()
+            .Digit()
+            .BuildRegex();
 
-            // When/Then
-            // ReSharper disable once ExpressionIsAlwaysNull
-            var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, null));
+        // When/Then
+        // ReSharper disable once ExpressionIsAlwaysNull
+        var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, null));
 
-            // Then
-            Assert.That(exception.ParamName, Is.EqualTo("replacement"));
-        }
+        // Then
+        Assert.That(exception.ParamName, Is.EqualTo("replacement"));
     }
 }

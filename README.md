@@ -103,12 +103,17 @@ var regex = new RegexBuilder()
 The logging feature introduced in version 1.3 wasn't proving as useful as I'd imagined and had introduced various maintenance difficulties.
 In this release the APIs are deprecated and do nothing. **Logging will be removed altogether in version 2.0.**
 
----
-![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.Java/master/artwork/RegexToolbox-icon-32.png) **Java developer?** Check out the Java version of this library, [RegexToolbox.Java](https://github.com/markwhitaker/RegexToolbox.Java).
+## Also for .NET developers
 
-![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.kt/master/artwork/RegexToolbox-icon-32.png) **Kotlin developer?** Check out the Kotlin version of this library, [RegexToolbox.kt](https://github.com/markwhitaker/RegexToolbox.kt).
+![icon](https://raw.githubusercontent.com/markwhitaker/MimeTypes.NET/main/Artwork/MimeTypes-icon-32.png) [MimeTypes.NET](https://github.com/markwhitaker/MimeTypes.NET): MIME type constants for your .NET projects
 
-![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.JS/master/artwork/RegexToolbox-icon-32.png) **Web developer?** Check out the web version of this library, [RegexToolbox.JS](https://github.com/markwhitaker/RegexToolbox.JS).
+## RegexToolbox for other languages
+
+![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.Java/master/artwork/RegexToolbox-icon-32.png) [RegexToolbox for Java](https://github.com/markwhitaker/RegexToolbox.Java)
+
+![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.kt/master/artwork/RegexToolbox-icon-32.png) [RegexToolbox for Kotlin](https://github.com/markwhitaker/RegexToolbox.kt)
+
+![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.JS/master/artwork/RegexToolbox-icon-32.png) [RegexToolbox for JavaScript](https://github.com/markwhitaker/RegexToolbox.JS)
 
 ---
 ###### **RegexToolbox:** Now you can be a [hero](https://xkcd.com/208/) without knowing regular expressions.

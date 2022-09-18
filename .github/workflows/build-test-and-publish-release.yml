@@ -1,0 +1,10 @@
+name: Build, test and publish release
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-to-nuget:
+    name: Publish release to NuGet
+    uses: markwhitaker/shared-workflows/.github/workflows/dotnet-publish-release-to-nuget.yml@main
+    secrets: inherit

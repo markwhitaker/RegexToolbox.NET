@@ -5,18 +5,12 @@
     /// </summary>
     public class RegexQuantifier
     {
-        #region Private property and constructor
-
         private string RegexString { get; set; }
 
         private RegexQuantifier(string regexString)
         {
             RegexString = regexString;
         }
-
-        #endregion
-
-        #region Public static properties
 
         /// <summary>
         /// Quantifier to match the preceding element zero or more times
@@ -32,10 +26,6 @@
         /// Quantifier to match the preceding element once or not at all
         /// </summary>
         public static RegexGreedyQuantifier ZeroOrOne => new RegexGreedyQuantifier("?");
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Quantifier to match an exact number of occurrences of the preceding element
@@ -65,14 +55,7 @@
         public static RegexGreedyQuantifier Between(int minimum, int maximum) =>
             new RegexGreedyQuantifier("{" + minimum + "," + maximum + "}");
 
-        public override string ToString()
-        {
-            return RegexString;
-        }
-
-        #endregion
-
-        #region Member classes
+        public override string ToString() => RegexString;
 
         /// <summary>
         /// A quantifier which defaults to greedy matching: in other words, if used
@@ -97,7 +80,5 @@
                 }
             }
         }
-
-        #endregion
     }
 }

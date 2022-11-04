@@ -92,11 +92,9 @@ namespace RegexToolbox
             return result;
         }
 
-        private static string MakeSafeForRegex(string s)
-        {
-            return RegexUnsafeCharacters
+        private static string MakeSafeForRegex(string s) =>
+            RegexUnsafeCharacters
                 .Aggregate(s, (safe, notSafe) =>
                     safe.Replace(notSafe, $@"\{notSafe}"));
-        }
     }
 }

@@ -40,13 +40,11 @@ namespace RegexToolbox
         /// </example>
         /// <param name="text">regex text to add</param>
         /// <param name="quantifier">Quantifier to apply to the whole string</param>
-        public RegexBuilder RegexText(string text, RegexQuantifier quantifier = null)
-        {
+        public RegexBuilder RegexText(string text, RegexQuantifier quantifier = null) =>
             // If we have a quantifier, apply it to the whole string by putting it in a non-capturing group
-            return quantifier == null
+            quantifier == null
                 ? AddPart(text)
                 : AddPartInNonCapturingGroup(text, quantifier);
-        }
 
         /// <summary>
         /// Add an element to match any character.

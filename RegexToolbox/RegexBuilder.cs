@@ -30,6 +30,7 @@ namespace RegexToolbox
         private static readonly IReadOnlyDictionary<RegexOptions, System.Text.RegularExpressions.RegexOptions>
             RegexOptionsMap = new Dictionary<RegexOptions, System.Text.RegularExpressions.RegexOptions>
             {
+                { RegexOptions.Compiled, System.Text.RegularExpressions.RegexOptions.Compiled },
                 { RegexOptions.IgnoreCase, System.Text.RegularExpressions.RegexOptions.IgnoreCase },
                 { RegexOptions.Multiline, System.Text.RegularExpressions.RegexOptions.Multiline }
             };

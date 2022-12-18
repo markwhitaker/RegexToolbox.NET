@@ -17,6 +17,16 @@ public class RegexBuilderTests
     }
 
     [Test]
+    public void TestCompiled()
+    {
+        var regex = new RegexBuilder()
+            .AnyCharacter()
+            .BuildRegex(Compiled);
+
+        Assert.That(regex.Options, Is.EqualTo(System.Text.RegularExpressions.RegexOptions.Compiled));
+    }
+
+    [Test]
     public void TestIgnoreCase()
     {
         var regex = new RegexBuilder()
@@ -37,15 +47,16 @@ public class RegexBuilderTests
     }
 
     [Test]
-    public void TestIgnoreCaseAndMultiline()
+    public void TestAllOptions()
     {
         const System.Text.RegularExpressions.RegexOptions expectedOptions =
+            System.Text.RegularExpressions.RegexOptions.Compiled |
             System.Text.RegularExpressions.RegexOptions.IgnoreCase |
             System.Text.RegularExpressions.RegexOptions.Multiline;
 
         var regex = new RegexBuilder()
             .AnyCharacter()
-            .BuildRegex(IgnoreCase, Multiline);
+            .BuildRegex(Compiled, IgnoreCase, Multiline);
 
         Assert.That(regex.Options, Is.EqualTo(expectedOptions));
     }

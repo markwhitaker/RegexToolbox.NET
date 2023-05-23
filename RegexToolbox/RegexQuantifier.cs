@@ -5,11 +5,11 @@
     /// </summary>
     public class RegexQuantifier
     {
-        private string RegexString { get; set; }
+        private string _regexString;
 
         private RegexQuantifier(string regexString)
         {
-            RegexString = regexString;
+            _regexString = regexString;
         }
 
         /// <summary>
@@ -55,7 +55,7 @@
         public static RegexGreedyQuantifier Between(int minimum, int maximum) =>
             new RegexGreedyQuantifier("{" + minimum + "," + maximum + "}");
 
-        public override string ToString() => RegexString;
+        public override string ToString() => _regexString;
 
         /// <summary>
         /// A quantifier which defaults to greedy matching: in other words, if used
@@ -75,7 +75,7 @@
             {
                 get
                 {
-                    RegexString += "?";
+                    _regexString += "?";
                     return this;
                 }
             }

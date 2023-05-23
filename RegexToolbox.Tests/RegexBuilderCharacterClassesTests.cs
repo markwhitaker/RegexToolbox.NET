@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
 using static RegexToolbox.RegexQuantifier;
 
@@ -523,9 +524,10 @@ public class RegexBuilderCharacterClassesTests
     {
         string[] strings = null;
 
-        Assert.Throws<RegexBuilderException>(() => new RegexBuilder()
+        var exception = Assert.Throws<ArgumentNullException>(() => new RegexBuilder()
             .AnyOf(strings)
             .BuildRegex());
+        Assert.That(exception, Is.Not.Null);
     }
 
     [Test]
@@ -533,9 +535,10 @@ public class RegexBuilderCharacterClassesTests
     {
         string[] strings = {};
 
-        Assert.Throws<RegexBuilderException>(() => new RegexBuilder()
+        var exception = Assert.Throws<ArgumentException>(() => new RegexBuilder()
             .AnyOf(strings)
             .BuildRegex());
+        Assert.That(exception, Is.Not.Null);
     }
 
     [Test]
@@ -612,9 +615,10 @@ public class RegexBuilderCharacterClassesTests
     {
         RegexBuilder.SubRegexBuilder[] subRegexBuilders = null;
 
-        Assert.Throws<RegexBuilderException>(() => new RegexBuilder()
+        var exception = Assert.Throws<ArgumentNullException>(() => new RegexBuilder()
             .AnyOf(subRegexBuilders)
             .BuildRegex());
+        Assert.That(exception, Is.Not.Null);
     }
 
     [Test]
@@ -622,9 +626,10 @@ public class RegexBuilderCharacterClassesTests
     {
         RegexBuilder.SubRegexBuilder[] subRegexBuilders = {};
 
-        Assert.Throws<RegexBuilderException>(() => new RegexBuilder()
+        var exception = Assert.Throws<ArgumentException>(() => new RegexBuilder()
             .AnyOf(subRegexBuilders)
             .BuildRegex());
+        Assert.That(exception, Is.Not.Null);
     }
 
     [Test]

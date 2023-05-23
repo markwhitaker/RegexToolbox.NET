@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RegexToolbox
@@ -201,12 +202,19 @@ namespace RegexToolbox
         /// </summary>
         /// <param name="strings">A number of strings, any one of which will be matched</param>
         /// <param name="quantifier">Quantifier to apply to this element</param>
+        /// <exception cref="System.ArgumentNullException"><paramref name="strings"/> is null</exception>
+        /// <exception cref="System.ArgumentException"><paramref name="strings"/> is empty</exception>
         public RegexBuilder AnyOf(IEnumerable<string> strings, RegexQuantifier quantifier = null)
         {
-            var stringsList = strings?.ToList();
-            if (stringsList == null || !stringsList.Any())
+            if (strings is null)
             {
-                throw new RegexBuilderException("No parameters passed to AnyOf", this);
+                throw new ArgumentNullException(nameof(strings));
+            }
+
+            var stringsList = strings.ToList();
+            if (!stringsList.Any())
+            {
+                throw new ArgumentException("Argument list is empty", nameof(strings));
             }
 
             return AddPartInNonCapturingGroup(
@@ -261,15 +269,21 @@ namespace RegexToolbox
         /// </example>
         /// <param name="subRegexes">RegexBuilder chains that represent alternative sub-regexes to match</param>
         /// <param name="quantifier">Quantifier to apply to this group of alternatives</param>
-        /// <exception cref="RegexBuilderException">subRegexBuilders is null or empty</exception>
+        /// <exception cref="System.ArgumentNullException"><paramref name="subRegexes"/> is null</exception>
+        /// <exception cref="System.ArgumentException"><paramref name="subRegexes"/> is empty</exception>
         public RegexBuilder AnyOf(
             IEnumerable<SubRegexBuilder> subRegexes,
             RegexQuantifier quantifier = null)
         {
-            var subRegexesArray = subRegexes?.ToArray();
-            if (subRegexesArray == null || !subRegexesArray.Any())
+            if (subRegexes is null)
             {
-                throw new RegexBuilderException("No parameters passed to AnyOf", this);
+                throw new ArgumentNullException(nameof(subRegexes));
+            }
+
+            var subRegexesArray = subRegexes.ToArray();
+            if (!subRegexesArray.Any())
+            {
+                throw new ArgumentException("Argument list is empty", nameof(subRegexes));
             }
 
             StartNonCapturingGroup();

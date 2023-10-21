@@ -14,10 +14,12 @@
         <Repository>https://github.com/markwhitaker/RegexToolbox.NET</Repository>
         <RepositoryType>Git</RepositoryType>
         <Company>Mainwave</Company>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="icon\RegexToolbox-icon-128.png" Pack="true" PackagePath="\" />
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>

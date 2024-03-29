@@ -137,6 +137,7 @@ public class RegexExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => regex.Remove(input));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("input"));
     }
 
@@ -153,6 +154,7 @@ public class RegexExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => regex.RemoveFirst(input));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("input"));
     }
 
@@ -169,6 +171,7 @@ public class RegexExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => regex.RemoveLast(input));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("input"));
     }
 
@@ -184,6 +187,7 @@ public class RegexExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => regex.Remove(input));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("regex"));
     }
 
@@ -199,6 +203,7 @@ public class RegexExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => regex.RemoveFirst(input));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("regex"));
     }
 
@@ -214,6 +219,7 @@ public class RegexExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => regex.RemoveLast(input));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("regex"));
     }
 }

@@ -137,6 +137,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("input"));
     }
 
@@ -153,6 +154,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("input"));
     }
 
@@ -169,6 +171,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("input"));
     }
 
@@ -184,6 +187,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.Remove(regex));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("regex"));
     }
 
@@ -199,6 +203,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveFirst(regex));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("regex"));
     }
 
@@ -214,6 +219,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.RemoveLast(regex));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("regex"));
     }
 
@@ -262,6 +268,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, "x"));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("input"));
     }
 
@@ -277,6 +284,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, "x"));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("regex"));
     }
 
@@ -294,6 +302,7 @@ public class StringExtensionsTests
         var exception = Assert.Throws<ArgumentNullException>(() => input.Replace(regex, null));
 
         // Then
+        Assert.That(exception, Is.Not.Null);
         Assert.That(exception.ParamName, Is.EqualTo("replacement"));
     }
 }

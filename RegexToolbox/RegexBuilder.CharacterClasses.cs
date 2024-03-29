@@ -246,7 +246,8 @@ public sealed partial class RegexBuilder
     /// </code>
     /// </example>
     /// <param name="subRegexBuilders">RegexBuilder chains that represent alternative sub-regexes to match</param>
-    /// <exception cref="RegexBuilderException">subRegexBuilders is null or empty</exception>
+    /// <exception cref="System.ArgumentNullException"><paramref name="subRegexBuilders"/> is null</exception>
+    /// <exception cref="System.ArgumentException"><paramref name="subRegexBuilders"/> is empty</exception>
     public RegexBuilder AnyOf(params SubRegexBuilder[] subRegexBuilders) =>
         AnyOf(subRegexBuilders, null);
 
@@ -267,23 +268,23 @@ public sealed partial class RegexBuilder
     ///     .BuildRegex();
     /// </code>
     /// </example>
-    /// <param name="subRegexes">RegexBuilder chains that represent alternative sub-regexes to match</param>
+    /// <param name="subRegexBuilders">RegexBuilder chains that represent alternative sub-regexes to match</param>
     /// <param name="quantifier">Quantifier to apply to this group of alternatives</param>
-    /// <exception cref="System.ArgumentNullException"><paramref name="subRegexes"/> is null</exception>
-    /// <exception cref="System.ArgumentException"><paramref name="subRegexes"/> is empty</exception>
+    /// <exception cref="System.ArgumentNullException"><paramref name="subRegexBuilders"/> is null</exception>
+    /// <exception cref="System.ArgumentException"><paramref name="subRegexBuilders"/> is empty</exception>
     public RegexBuilder AnyOf(
-        IEnumerable<SubRegexBuilder> subRegexes,
+        IEnumerable<SubRegexBuilder> subRegexBuilders,
         RegexQuantifier quantifier = null)
     {
-        if (subRegexes is null)
+        if (subRegexBuilders is null)
         {
-            throw new ArgumentNullException(nameof(subRegexes));
+            throw new ArgumentNullException(nameof(subRegexBuilders));
         }
 
-        var subRegexesArray = subRegexes.ToArray();
+        var subRegexesArray = subRegexBuilders.ToArray();
         if (!subRegexesArray.Any())
         {
-            throw new ArgumentException("Argument list is empty", nameof(subRegexes));
+            throw new ArgumentException("Argument list is empty", nameof(subRegexBuilders));
         }
 
         StartNonCapturingGroup();

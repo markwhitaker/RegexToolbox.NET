@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using static RegexToolbox.RegexOptions;
+﻿using static RegexToolbox.RegexOptions;
 
 namespace RegexToolbox.Tests;
 

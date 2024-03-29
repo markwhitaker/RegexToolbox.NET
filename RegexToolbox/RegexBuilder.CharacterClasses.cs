@@ -97,6 +97,8 @@ public sealed partial class RegexBuilder
     /// <param name="quantifier">Quantifier to apply to this element</param>
     public RegexBuilder CarriageReturn(RegexQuantifier quantifier = null) => AddPart(@"\r", quantifier);
 
+    public RegexBuilder NewLine(RegexQuantifier quantifier = null) => AddPart(@"\r?\n", quantifier);
+
     /// <summary>
     /// Add an element to match any single decimal digit (0-9).
     /// </summary>

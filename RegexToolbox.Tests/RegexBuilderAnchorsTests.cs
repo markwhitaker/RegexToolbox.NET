@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-
-namespace RegexToolbox.Tests;
+﻿namespace RegexToolbox.Tests;
 
 [TestFixture]
 public class RegexBuilderAnchorsTests

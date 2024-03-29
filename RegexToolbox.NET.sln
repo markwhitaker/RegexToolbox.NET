@@ -14,6 +14,8 @@ ProjectSection(SolutionItems) = preProject
 	.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegexToolbox.IntegrationTests", "RegexToolbox.IntegrationTests\RegexToolbox.IntegrationTests.csproj", "{2E2B0A25-06F5-4A98-AB8B-28DA722DC5DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,5 +30,9 @@ Global
 		{32CF1BA4-33B2-483A-AE45-2AE59558132B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32CF1BA4-33B2-483A-AE45-2AE59558132B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32CF1BA4-33B2-483A-AE45-2AE59558132B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E2B0A25-06F5-4A98-AB8B-28DA722DC5DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2B0A25-06F5-4A98-AB8B-28DA722DC5DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E2B0A25-06F5-4A98-AB8B-28DA722DC5DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E2B0A25-06F5-4A98-AB8B-28DA722DC5DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

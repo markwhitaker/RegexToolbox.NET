@@ -1,7 +1,4 @@
-﻿using NUnit.Framework;
-using static RegexToolbox.RegexQuantifier;
-
-namespace RegexToolbox.Tests;
+﻿namespace RegexToolbox.Tests;
 
 [TestFixture]
 public class RegexQuantifierTests

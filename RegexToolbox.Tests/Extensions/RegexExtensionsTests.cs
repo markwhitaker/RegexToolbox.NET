@@ -1,9 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-using NUnit.Framework;
-using RegexToolbox.Extensions;
-
-namespace RegexToolbox.Tests.Extensions;
+﻿namespace RegexToolbox.Tests.Extensions;
 
 [TestFixture]
 public class RegexExtensionsTests

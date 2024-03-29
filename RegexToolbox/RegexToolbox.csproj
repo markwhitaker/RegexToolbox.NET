@@ -15,6 +15,7 @@
         <RepositoryType>Git</RepositoryType>
         <Company>Mainwave</Company>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

@@ -13,11 +13,13 @@ friends
     public void Test1()
     {
         var regex = new RegexBuilder()
+            .StartOfString()
             .Text("Hello")
             .NewLine(RegexQuantifier.Exactly(2))
             .Text("friends")
+            .EndOfString()
             .BuildRegex();
 
-        Assert.That(regex.IsMatch(TestString), Is.True);
+        Assert.That(TestString, Does.Match(regex));
     }
 }

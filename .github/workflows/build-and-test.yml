@@ -3,22 +3,9 @@ on:
   push:
     branches: [main]
   pull_request:
-    types: [opened, reopened, synchronize, ready_for_review]
-
-permissions:
-  contents: write
-  pull-requests: write
+    types: [opened, reopened, synchronize]
 
 jobs:
   build-and-test:
     name: Build and test
     uses: markwhitaker/shared-workflows/.github/workflows/dotnet-build-and-test.yml@main
-
-  dependabot-auto-merge:
-    name: Auto-merge Dependabot PR (minor & patch)
-    needs: build-and-test
-    if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' }}
-    uses: markwhitaker/shared-workflows/.github/workflows/dependabot-auto-merge-minor-patch.yml@main
-    secrets: inherit
-    with:
-      pr-number: ${{ github.event.pull_request.number }}

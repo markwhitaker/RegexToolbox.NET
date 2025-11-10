@@ -17,6 +17,7 @@ jobs:
   dependabot-auto-merge:
     name: Auto-merge Dependabot PR (minor & patch)
     needs: build-and-test
+    if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' }}
     uses: markwhitaker/shared-workflows/.github/workflows/dependabot-auto-merge-minor-patch.yml@main
     secrets: inherit
     with:

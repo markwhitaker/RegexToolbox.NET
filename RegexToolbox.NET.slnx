@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Solution items/">
+    <File Path=".github/dependabot.yml" />
+    <File Path=".github/workflows/build-and-test.yml" />
+    <File Path=".github/workflows/publish-to-nuget.yml" />
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="RegexToolbox.Tests/RegexToolbox.Tests.csproj" />
+  <Project Path="RegexToolbox/RegexToolbox.csproj" />
+</Solution>

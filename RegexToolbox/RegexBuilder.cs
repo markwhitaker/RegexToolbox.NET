@@ -22,10 +22,10 @@ namespace RegexToolbox;
 public sealed partial class RegexBuilder
 {
     private static readonly string[] RegexUnsafeCharacters =
-    {
+    [
         // These are escaped in the order declared here, so make sure \ always comes first
         @"\", "?", ".", "+", "*", "^", "$", "(", ")", "[", "]", "{", "}", "|"
-    };
+    ];
 
     private static readonly IReadOnlyDictionary<RegexOptions, System.Text.RegularExpressions.RegexOptions>
         RegexOptionsMap = new Dictionary<RegexOptions, System.Text.RegularExpressions.RegexOptions>
@@ -35,7 +35,7 @@ public sealed partial class RegexBuilder
             { RegexOptions.Multiline, System.Text.RegularExpressions.RegexOptions.Multiline }
         };
 
-    private readonly StringBuilder _stringBuilder = new StringBuilder();
+    private readonly StringBuilder _stringBuilder = new();
 
     /// <summary>
     /// A delegate used to build a sub-part of a regex, for example in <see cref="RegexBuilder.Group"/>.

@@ -70,7 +70,7 @@ public sealed partial class RegexBuilder
     /// <code>Whitespace(RegexQuantifier.ZeroOrMore)</code>.
     /// </summary>
     /// <returns></returns>
-    public RegexBuilder PossibleWhitespace() => AddPart(@"\s", RegexQuantifier.ZeroOrMore);
+    public RegexBuilder PossibleWhitespace() => Whitespace(RegexQuantifier.ZeroOrMore);
 
     /// <summary>
     /// Add an element to match a single space character. If you want to match any kind of white space, use

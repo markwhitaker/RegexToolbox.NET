@@ -1,4 +1,4 @@
-![icon](Artwork/RegexToolbox-icon-100.png)
+![icon](https://raw.githubusercontent.com/markwhitaker/RegexToolbox.NET/main/Artwork/RegexToolbox-icon-100.png)
 
 # RegexToolbox.NET [![Build and test](https://github.com/markwhitaker/RegexToolbox.NET/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/markwhitaker/RegexToolbox.NET/actions/workflows/build-and-test.yml) [![Publish to NuGet](https://github.com/markwhitaker/RegexToolbox.NET/actions/workflows/publish-to-nuget.yml/badge.svg)](https://github.com/markwhitaker/RegexToolbox.NET/actions/workflows/publish-to-nuget.yml) [![NuGet Version and Downloads count](https://img.shields.io/nuget/dt/RegexToolbox)](https://www.nuget.org/packages/RegexToolbox/)
 
